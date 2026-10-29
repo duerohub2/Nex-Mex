@@ -28,7 +28,7 @@ type HQSidebarProps = {
 const TAB_LABELS: Record<HQSidebarTab, string> = {
   inbox: "Kotak Masuk",
   history: "Riwayat",
-  kanban: "Kanban",
+  kanban: "Papan Tugas",
   playbooks: "Panduan",
   analytics: "Analitik",
 };
@@ -72,10 +72,10 @@ export function HQSidebar({
           onClick={onToggle}
           className="rounded-l-md border border-r-0 border-cyan-500/30 bg-[#06090d]/90 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] text-cyan-300 shadow-xl backdrop-blur transition-colors hover:border-cyan-400/50 hover:text-cyan-100"
           aria-expanded={open}
-          aria-label={open ? "Collapse headquarters sidebar" : "Open headquarters sidebar"}
+          aria-label={open ? "Tutup panel kantor pusat" : "Buka panel kantor pusat"}
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
-            {open ? "COLLAPSE HQ" : "OPEN HQ"}
+            {open ? "TUTUP KANTOR" : "BUKA KANTOR"}
           </span>
         </button>
 
@@ -85,10 +85,10 @@ export function HQSidebar({
             onOpenMarketplace();
           }}
           className="rounded-l-md border border-r-0 border-fuchsia-500/25 bg-[#100611]/90 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] text-fuchsia-300/80 shadow-xl backdrop-blur transition-colors hover:border-fuchsia-400/45 hover:text-fuchsia-100"
-          aria-label="Open marketplace"
+          aria-label="Buka pasar keterampilan"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
-            MARKETPLACE
+            KETERAMPILAN
           </span>
         </button>
 
@@ -109,7 +109,7 @@ export function HQSidebar({
           aria-label="Buka panel analitik"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
-            ANALYTICS
+            ANALITIK
           </span>
         </button>
       </div>
@@ -122,7 +122,7 @@ export function HQSidebar({
         >
           <div className="border-b border-cyan-500/15 px-4 py-3">
             <div className="font-mono text-[10px] font-semibold tracking-[0.32em] text-cyan-300/80">
-              {analyticsOnly ? "ANALYTICS" : "KANTOR PUSAT"}
+              {analyticsOnly ? "ANALITIK" : "KANTOR PUSAT"}
             </div>
             <div className="mt-1 font-mono text-[11px] text-white/45">
               {analyticsOnly
@@ -135,7 +135,7 @@ export function HQSidebar({
                 onClick={onAddAgent}
                 className="mt-3 rounded border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-200 transition-colors hover:border-cyan-400/40 hover:text-cyan-100"
               >
-                Add Agent
+                Tambah Agen
               </button>
             ) : null}
             {!railOnly && onOpenCompanyBuilder ? (
@@ -144,7 +144,7 @@ export function HQSidebar({
                 onClick={onOpenCompanyBuilder}
                 className="mt-2 rounded border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-200 transition-colors hover:border-emerald-400/40 hover:text-emerald-100"
               >
-                Build Company
+                Bangun Perusahaan
               </button>
             ) : null}
             {railOnly ? (
@@ -153,7 +153,7 @@ export function HQSidebar({
                 onClick={() => onTabChange("inbox")}
                 className="mt-3 rounded border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-200 transition-colors hover:border-cyan-400/40 hover:text-cyan-100"
               >
-                Back To HQ
+                Kembali ke Kantor
               </button>
             ) : null}
           </div>
@@ -161,7 +161,7 @@ export function HQSidebar({
           {!railOnly ? (
             <div
               role="tablist"
-              aria-label="Headquarters panels"
+              aria-label="Panel kantor pusat"
               className="grid grid-cols-4 border-b border-cyan-500/15"
             >
               {PRIMARY_TABS.map((tab) => {
