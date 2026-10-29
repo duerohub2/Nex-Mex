@@ -65,12 +65,12 @@ export function HQSidebar({
   const boardLikeWidth = activeTab === "kanban";
 
   return (
-    <aside className="pointer-events-none fixed inset-y-0 right-0 z-20 flex justify-end">
-      <div className="pointer-events-auto mt-14 flex shrink-0 flex-col items-end gap-1.5">
+    <aside className="pointer-events-none fixed inset-y-0 right-0 z-40 flex justify-end">
+      <div className="pointer-events-auto mt-16 flex shrink-0 flex-col items-end gap-2 pr-0">
         <button
           type="button"
           onClick={onToggle}
-          className="rounded-l-md border border-r-0 border-cyan-500/30 bg-[#06090d]/90 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] text-cyan-300 shadow-xl backdrop-blur transition-colors hover:border-cyan-400/50 hover:text-cyan-100"
+          className="rounded-l-lg border-2 border-r-0 border-black bg-[#00f5ff] px-2 py-3 font-mono text-[10px] font-black tracking-[0.12em] text-black shadow-[-4px_4px_0_#000] transition-transform hover:-translate-x-1"
           aria-expanded={open}
           aria-label={open ? "Tutup panel kantor pusat" : "Buka panel kantor pusat"}
         >
@@ -84,7 +84,7 @@ export function HQSidebar({
           onClick={() => {
             onOpenMarketplace();
           }}
-          className="rounded-l-md border border-r-0 border-fuchsia-500/25 bg-[#100611]/90 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] text-fuchsia-300/80 shadow-xl backdrop-blur transition-colors hover:border-fuchsia-400/45 hover:text-fuchsia-100"
+          className="rounded-l-lg border-2 border-r-0 border-black bg-[#ff4fd8] px-2 py-3 font-mono text-[10px] font-black tracking-[0.12em] text-black shadow-[-4px_4px_0_#000] transition-transform hover:-translate-x-1"
           aria-label="Buka pasar keterampilan"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
@@ -100,10 +100,10 @@ export function HQSidebar({
               onToggle();
             }
           }}
-          className={`rounded-l-md border border-r-0 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] shadow-xl backdrop-blur transition-colors ${
+          className={`rounded-l-lg border-2 border-r-0 px-2 py-3 font-mono text-[10px] font-black tracking-[0.12em] shadow-[-4px_4px_0_#000] transition-transform ${
             analyticsOnly
-              ? "border-amber-400/50 bg-[#1a1206]/95 text-amber-200"
-              : "border-amber-500/25 bg-[#120d06]/90 text-amber-300/80 hover:border-amber-400/45 hover:text-amber-100"
+              ? "border-black bg-[#ffe600] text-black shadow-[-4px_4px_0_#000]"
+              : "border-black bg-[#ffe600] text-black shadow-[-4px_4px_0_#000] hover:-translate-x-1"
           }`}
           aria-pressed={analyticsOnly}
           aria-label="Buka panel analitik"
@@ -116,15 +116,15 @@ export function HQSidebar({
 
       {open ? (
         <div
-          className={`pointer-events-auto flex h-full flex-col border-l border-cyan-500/20 bg-black/85 shadow-2xl backdrop-blur ${
-            boardLikeWidth ? "w-[min(94vw,1180px)]" : "w-56"
+          className={`pointer-events-auto flex max-h-[calc(100dvh-4.5rem)] min-h-0 flex-col border-2 border-black bg-[#fff8e7] text-black shadow-[-8px_8px_0_#000] ${
+            boardLikeWidth ? "w-[min(96vw,1180px)]" : "w-[min(88vw,22rem)]"
           }`}
         >
-          <div className="border-b border-cyan-500/15 px-4 py-3">
-            <div className="font-mono text-[10px] font-semibold tracking-[0.32em] text-cyan-300/80">
+          <div className="border-b-2 border-black bg-[#ffe600] px-3 py-3">
+            <div className="font-mono text-[10px] font-black tracking-[0.2em] text-black">
               {analyticsOnly ? "ANALITIK" : "KANTOR PUSAT"}
             </div>
-            <div className="mt-1 font-mono text-[11px] text-white/45">
+            <div className="mt-1 font-mono text-[11px] font-semibold text-black/70">
               {analyticsOnly
                 ? "Biaya, anggaran, dan kinerja sistem."
                 : "Pantau hasil, proses, dan jadwal."}
@@ -162,7 +162,7 @@ export function HQSidebar({
             <div
               role="tablist"
               aria-label="Panel kantor pusat"
-              className="grid grid-cols-4 border-b border-cyan-500/15"
+              className="grid grid-cols-2 border-b-2 border-black sm:grid-cols-4"
             >
               {PRIMARY_TABS.map((tab) => {
                 const isActive = tab === activeTab;
@@ -176,10 +176,10 @@ export function HQSidebar({
                     aria-controls={`hq-panel-${tab}`}
                     id={`hq-tab-${tab}`}
                     onClick={() => onTabChange(tab)}
-                    className={`flex items-center justify-center gap-1 border-r border-cyan-500/10 px-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors last:border-r-0 ${
+                    className={`flex min-h-11 items-center justify-center gap-1 border-b border-r border-black/20 px-2 py-2.5 font-mono text-[10px] font-black uppercase tracking-[0.08em] transition-colors sm:border-b-0 sm:text-[11px] sm:tracking-[0.12em] last:border-r-0 ${
                       isActive
-                        ? "bg-cyan-500/10 text-cyan-100"
-                        : "text-white/45 hover:bg-white/5 hover:text-white/80"
+                        ? "bg-[#00f5ff] text-black"
+                        : "bg-white text-black/65 hover:bg-[#ff4fd8] hover:text-black"
                     }`}
                   >
                     <span>{TAB_LABELS[tab]}</span>
@@ -198,7 +198,7 @@ export function HQSidebar({
             role="tabpanel"
             id={`hq-panel-${activeTab}`}
             aria-labelledby={`hq-tab-${activeTab}`}
-            className="min-h-0 flex-1 overflow-hidden"
+            className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
           >
             {activePanel}
           </div>
