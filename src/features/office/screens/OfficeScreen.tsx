@@ -4995,11 +4995,11 @@ export function OfficeScreen({
       ) : null}
 
       {showHermesConsole ? (
-        <section className="pointer-events-auto fixed bottom-3 left-3 z-30 flex w-[520px] max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded border border-cyan-500/25 bg-black/78 shadow-2xl backdrop-blur">
-          <div className="flex items-center justify-between border-b border-cyan-500/15 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-200/80">
+        <section className="pointer-events-auto fixed bottom-2 left-2 right-2 z-30 flex max-h-[34dvh] w-auto flex-col overflow-hidden rounded-xl border-2 border-black bg-[#fff8e7]/95 text-black shadow-[5px_5px_0_#000] backdrop-blur sm:bottom-3 sm:left-3 sm:right-auto sm:max-h-[42dvh] sm:w-[520px]">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-black bg-[#00f5ff] px-2 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black sm:px-3 sm:text-[11px] sm:tracking-[0.12em]">
             <span>Konsol Aktivitas Agen</span>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] text-cyan-100/45">
+              <span className="text-[9px] font-bold text-black/70 sm:text-[10px]">
                 agen {state.agents.length} | aktivitas{" "}
                 {filteredHermesLogEntries.length}/{hermesLogEntries.length}
               </span>
@@ -5008,7 +5008,7 @@ export function OfficeScreen({
                 onClick={() => {
                   void handleCopyHermesConsoleJson();
                 }}
-                className="rounded border border-cyan-500/20 px-2 py-0.5 text-[9px] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
+                className="rounded border-2 border-black bg-[#ff4fd8] px-2 py-1 text-[9px] font-black text-black shadow-[2px_2px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 {hermesConsoleCopyStatus === "copied"
                   ? "Copied"
@@ -5019,14 +5019,14 @@ export function OfficeScreen({
               <button
                 type="button"
                 onClick={handleDownloadHermesConsoleJson}
-                className="rounded border border-cyan-500/20 px-2 py-0.5 text-[9px] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
+                className="rounded border-2 border-black bg-[#ff4fd8] px-2 py-1 text-[9px] font-black text-black shadow-[2px_2px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 Unduh JSON
               </button>
               <button
                 type="button"
                 onClick={handleClearHermesConsole}
-                className="rounded border border-cyan-500/20 px-2 py-0.5 text-[9px] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
+                className="rounded border-2 border-black bg-[#ff4fd8] px-2 py-1 text-[9px] font-black text-black shadow-[2px_2px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 Clear
               </button>
@@ -5035,7 +5035,7 @@ export function OfficeScreen({
                 onClick={() =>
                   setHermesConsoleCollapsed((previous) => !previous)
                 }
-                className="rounded border border-cyan-500/20 px-2 py-0.5 text-[9px] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
+                className="rounded border-2 border-black bg-[#ff4fd8] px-2 py-1 text-[9px] font-black text-black shadow-[2px_2px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 {hermesConsoleCollapsed ? "Perluas" : "Perkecil"}
               </button>
