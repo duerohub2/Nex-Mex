@@ -4996,10 +4996,10 @@ export function OfficeScreen({
 
       {showHermesConsole ? (
         <section className="pointer-events-auto fixed bottom-2 left-2 right-2 z-30 flex max-h-[34dvh] w-auto flex-col overflow-hidden rounded-xl border-2 border-black bg-[#fff8e7]/95 text-black shadow-[5px_5px_0_#000] backdrop-blur sm:bottom-3 sm:left-3 sm:right-auto sm:max-h-[42dvh] sm:w-[520px]">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-black bg-[#00f5ff] px-2 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black sm:px-3 sm:text-[11px] sm:tracking-[0.12em]">
+          <div className="flex flex-col items-stretch gap-2 border-b-2 border-black bg-[#00f5ff] px-2 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black sm:flex-row sm:items-center sm:justify-between sm:px-3 sm:text-[11px] sm:tracking-[0.12em]">
             <span>Konsol Aktivitas Agen</span>
-            <div className="flex flex-wrap items-center justify-end gap-1.5">
-              <span className="text-[9px] font-bold text-black/70 sm:text-[10px]">
+            <div className="grid grid-cols-2 items-center gap-1.5 sm:flex sm:flex-wrap sm:justify-end">
+              <span className="col-span-2 text-[9px] font-bold text-black/70 sm:col-span-1 sm:text-[10px]">
                 agen {state.agents.length} | aktivitas{" "}
                 {filteredHermesLogEntries.length}/{hermesLogEntries.length}
               </span>
@@ -5028,7 +5028,7 @@ export function OfficeScreen({
                 onClick={handleClearHermesConsole}
                 className="rounded border-2 border-black bg-[#ff4fd8] px-2 py-1 text-[9px] font-black text-black shadow-[2px_2px_0_#000] transition-transform hover:-translate-y-0.5"
               >
-                Clear
+                Bersihkan
               </button>
               <button
                 type="button"
@@ -5051,7 +5051,7 @@ export function OfficeScreen({
                   onChange={(event) =>
                     setHermesConsoleSearch(event.target.value)
                   }
-                  placeholder="Search logs, payloads, thinking, user text."
+                  placeholder="Cari log, data, proses, atau pesan..."
                   className="min-w-0 flex-1 rounded border-2 border-black bg-white px-2 py-2 text-[10px] normal-case tracking-normal text-black placeholder:text-black/45 focus:outline-none"
                 />
                 {hermesConsoleSearch ? (
@@ -5207,7 +5207,7 @@ export function OfficeScreen({
       ) : null}
 
       <div
-        className={`fixed bottom-3 z-30 flex flex-col items-end gap-2 ${sidebarOpen ? "right-84" : "right-3"} ${
+        className={`fixed bottom-[36dvh] z-30 flex flex-col items-end gap-2 sm:bottom-3 ${sidebarOpen ? "right-84" : "right-3"} ${
           debugEnabled ? "hidden" : ""
         }`}
       >
@@ -5218,7 +5218,7 @@ export function OfficeScreen({
               width: chatRosterCollapsed
                 ? "min(680px, calc(100vw - 1.5rem))"
                 : "min(780px, calc(100vw - 1.5rem))",
-              height: "min(560px, calc(100vh - 5.5rem))",
+              height: "min(560px, calc(100dvh - 9rem))",
             }}
           >
             <div
