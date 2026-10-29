@@ -26,11 +26,11 @@ type HQSidebarProps = {
 };
 
 const TAB_LABELS: Record<HQSidebarTab, string> = {
-  inbox: "Inbox",
-  history: "History",
-  kanban: "Kanban",
-  playbooks: "Playbooks",
-  analytics: "Analytics",
+  inbox: "Kotak Masuk",
+  history: "Riwayat",
+  kanban: "Tugas",
+  playbooks: "Panduan",
+  analytics: "Analitik",
 };
 
 const PRIMARY_TABS: HQSidebarTab[] = ["inbox", "history", "kanban", "playbooks"];
@@ -72,10 +72,10 @@ export function HQSidebar({
           onClick={onToggle}
           className="rounded-l-md border border-r-0 border-cyan-500/30 bg-[#06090d]/90 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] text-cyan-300 shadow-xl backdrop-blur transition-colors hover:border-cyan-400/50 hover:text-cyan-100"
           aria-expanded={open}
-          aria-label={open ? "Collapse headquarters sidebar" : "Open headquarters sidebar"}
+          aria-label={open ? "Tutup panel kantor pusat" : "Buka panel kantor pusat"}
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
-            {open ? "COLLAPSE HQ" : "OPEN HQ"}
+            {open ? "TUTUP HQ" : "BUKA HQ"}
           </span>
         </button>
 
@@ -85,7 +85,7 @@ export function HQSidebar({
             onOpenMarketplace();
           }}
           className="rounded-l-md border border-r-0 border-fuchsia-500/25 bg-[#100611]/90 px-1.5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] text-fuchsia-300/80 shadow-xl backdrop-blur transition-colors hover:border-fuchsia-400/45 hover:text-fuchsia-100"
-          aria-label="Open marketplace"
+          aria-label="Buka marketplace"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
             MARKETPLACE
@@ -106,7 +106,7 @@ export function HQSidebar({
               : "border-amber-500/25 bg-[#120d06]/90 text-amber-300/80 hover:border-amber-400/45 hover:text-amber-100"
           }`}
           aria-pressed={analyticsOnly}
-          aria-label="Open analytics sidebar"
+          aria-label="Buka panel analitik"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
             ANALYTICS
@@ -122,12 +122,12 @@ export function HQSidebar({
         >
           <div className="border-b border-cyan-500/15 px-4 py-3">
             <div className="font-mono text-[10px] font-semibold tracking-[0.32em] text-cyan-300/80">
-              {analyticsOnly ? "ANALYTICS" : "HEADQUARTERS"}
+              {analyticsOnly ? "ANALYTICS" : "KANTOR PUSAT"}
             </div>
             <div className="mt-1 font-mono text-[11px] text-white/45">
               {analyticsOnly
-                ? "Cost, budgets, and performance intelligence."
-                : "Monitor outputs, runs, and schedules."}
+                ? "Biaya, anggaran, dan kinerja sistem."
+                : "Pantau hasil, proses, dan jadwal."}
             </div>
             {!railOnly && onAddAgent ? (
               <button
@@ -161,7 +161,7 @@ export function HQSidebar({
           {!railOnly ? (
             <div
               role="tablist"
-              aria-label="Headquarters panels"
+              aria-label="Panel kantor pusat"
               className="grid grid-cols-4 border-b border-cyan-500/15"
             >
               {PRIMARY_TABS.map((tab) => {
@@ -184,7 +184,7 @@ export function HQSidebar({
                   >
                     <span>{TAB_LABELS[tab]}</span>
                     {showBadge ? (
-                      <span className="rounded bg-cyan-500/15 px-1.5 py-0.5 text-[10px] text-cyan-300" aria-label={`${inboxCount} unread`}>
+                      <span className="rounded bg-cyan-500/15 px-1.5 py-0.5 text-[10px] text-cyan-300" aria-label={`${inboxCount} belum dibaca`}>
                         {inboxCount}
                       </span>
                     ) : null}
