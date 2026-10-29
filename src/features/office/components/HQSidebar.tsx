@@ -26,11 +26,11 @@ type HQSidebarProps = {
 };
 
 const TAB_LABELS: Record<HQSidebarTab, string> = {
-  inbox: "Inbox",
-  history: "History",
+  inbox: "Kotak Masuk",
+  history: "Riwayat",
   kanban: "Kanban",
-  playbooks: "Playbooks",
-  analytics: "Analytics",
+  playbooks: "Panduan",
+  analytics: "Analitik",
 };
 
 const PRIMARY_TABS: HQSidebarTab[] = ["inbox", "history", "kanban", "playbooks"];
@@ -106,7 +106,7 @@ export function HQSidebar({
               : "border-amber-500/25 bg-[#120d06]/90 text-amber-300/80 hover:border-amber-400/45 hover:text-amber-100"
           }`}
           aria-pressed={analyticsOnly}
-          aria-label="Open analytics sidebar"
+          aria-label="Buka panel analitik"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
             ANALYTICS
@@ -122,12 +122,12 @@ export function HQSidebar({
         >
           <div className="border-b border-cyan-500/15 px-4 py-3">
             <div className="font-mono text-[10px] font-semibold tracking-[0.32em] text-cyan-300/80">
-              {analyticsOnly ? "ANALYTICS" : "HEADQUARTERS"}
+              {analyticsOnly ? "ANALYTICS" : "KANTOR PUSAT"}
             </div>
             <div className="mt-1 font-mono text-[11px] text-white/45">
               {analyticsOnly
-                ? "Cost, budgets, and performance intelligence."
-                : "Monitor outputs, runs, and schedules."}
+                ? "Biaya, anggaran, dan kinerja sistem."
+                : "Pantau hasil, proses, dan jadwal."}
             </div>
             {!railOnly && onAddAgent ? (
               <button
