@@ -102,12 +102,12 @@ export const GatewayConnectScreen = ({
       return `Local gateway detected on port ${localPort}. Connecting…`;
     }
     if (status === "connecting") {
-      return "Connecting to remote gateway…";
+      return "Menghubungkan ke gateway jarak jauh…";
     }
     if (isLocal) {
-      return "No local gateway found.";
+      return "Gateway lokal tidak ditemukan.";
     }
-    return "Not connected to a gateway.";
+    return "Belum terhubung ke gateway.";
   }, [isLocal, localPort, status]);
   const selectedAdapterHint = useMemo(() => {
     switch (selectedAdapterType) {
@@ -127,7 +127,7 @@ export const GatewayConnectScreen = ({
     }
   }, [selectedAdapterType]);
   const connectDisabled = status === "connecting";
-  const connectLabel = connectDisabled ? "Connecting…" : "Connect";
+  const connectLabel = connectDisabled ? "Connecting…" : "Hubungkan";
   const statusDotClass =
     status === "connected"
       ? "ui-dot-status-connected"
@@ -206,14 +206,14 @@ export const GatewayConnectScreen = ({
       ) : null}
 
       <div className="space-y-0.5 text-xs text-muted-foreground">
-        <p className="font-medium text-foreground">Using Tailscale?</p>
+        <p className="font-medium text-foreground">Menggunakan Tailscale?</p>
         <p>
           URL: <span className="font-mono">wss://&lt;your-tailnet-host&gt;</span>
         </p>
       </div>
 
       <label className="flex flex-col gap-1 text-[11px] font-medium text-foreground/90">
-        {tokenOptional ? "Upstream token (optional)" : "Upstream token"}
+        {tokenOptional ? "Token gateway (opsional)" : "Token gateway"}
         <div className="relative">
           <input
             className="ui-input h-10 w-full rounded-md px-4 pr-10 font-sans text-sm text-foreground outline-none"
@@ -226,7 +226,7 @@ export const GatewayConnectScreen = ({
           <button
             type="button"
             className="ui-btn-icon absolute inset-y-0 right-1 my-auto h-8 w-8 border-transparent bg-transparent text-muted-foreground hover:bg-transparent hover:text-foreground"
-            aria-label={showToken ? "Hide token" : "Show token"}
+            aria-label={showToken ? "Sembunyikan token" : "Tampilkan token"}
             onClick={() => setShowToken((prev) => !prev)}
           >
             {showToken ? (
