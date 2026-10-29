@@ -10,7 +10,7 @@ import {
 } from "@/features/office/renderMode";
 import { RunningAvatarLoader } from "@/features/agents/components/RunningAvatarLoader";
 
-type GatewayConnectScreenProps = {
+type GatewayHubungkanScreenProps = {
   gatewayUrl: string;
   token: string;
   selectedAdapterType: StudioGatewayAdapterType;
@@ -22,7 +22,7 @@ type GatewayConnectScreenProps = {
   onTokenChange: (value: string) => void;
   onAdapterTypeChange: (value: StudioGatewayAdapterType) => void;
   onUseLocalDefaults: () => void;
-  onConnect: () => void;
+  onHubungkan: () => void;
   /** When provided, shows the 3D/2D office renderer choice before connecting. */
   renderMode?: OfficeRenderMode;
   onRenderModeChange?: (mode: OfficeRenderMode) => void;
@@ -37,7 +37,7 @@ const resolveLocalGatewayPort = (gatewayUrl: string): number => {
   return 18789;
 };
 
-export const GatewayConnectScreen = ({
+export const GatewayHubungkanScreen = ({
   gatewayUrl,
   token,
   selectedAdapterType,
@@ -49,10 +49,10 @@ export const GatewayConnectScreen = ({
   onTokenChange,
   onAdapterTypeChange,
   onUseLocalDefaults,
-  onConnect,
+  onHubungkan,
   renderMode,
   onRenderModeChange,
-}: GatewayConnectScreenProps) => {
+}: GatewayHubungkanScreenProps) => {
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">("idle");
   const [showToken, setShowToken] = useState(false);
   const tokenOptional =
@@ -99,35 +99,35 @@ export const GatewayConnectScreen = ({
   };
   const statusCopy = useMemo(() => {
     if (status === "connecting" && isLocal) {
-      return `Local gateway detected on port ${localPort}. Connecting…`;
+      return `Gateway lokal terdeteksi pada port ${localPort}. Menghubungkan…`;
     }
     if (status === "connecting") {
-      return "Connecting to remote gateway…";
+      return "Menghubungkan ke gateway jarak jauh…";
     }
     if (isLocal) {
-      return "No local gateway found.";
+      return "Gateway lokal tidak ditemukan.";
     }
-    return "Not connected to a gateway.";
+    return "Belum terhubung ke gateway.";
   }, [isLocal, localPort, status]);
   const selectedAdapterHint = useMemo(() => {
     switch (selectedAdapterType) {
       case "hermes":
-        return "Hermes is the agent runtime path with its own provider/account flow behind the gateway.";
+        return "Hermes adalah jalur runtime agen dengan alur penyedia dan akun sendiri di balik gateway.";
       case "hermes-agent":
         return "Hermes Agent connects straight to a hermes-agent backend's JSON-RPC gateway — no adapter process. Point it at the server root (Studio appends /api/ws) and use the session token, not a dashboard login.";
       case "demo":
-        return "Demo can fall back to a seeded main agent locally, or connect to the bundled mock gateway for streaming replies.";
+        return "Mode demo dapat menggunakan agen utama contoh secara lokal atau terhubung ke gateway tiruan untuk balasan langsung.";
       case "local":
         return "Local runtime expects a direct HTTP runtime/orchestrator boundary, not a provider catalog.";
       case "hermes3d":
         return "Hermes3D runtime preserves Hermes3D transcript conventions over the direct runtime seam.";
       case "custom":
       default:
-        return "Custom is the generic direct runtime seam. Use it for compatible orchestrators, not for provider-specific auth flows.";
+        return "Kustom adalah jalur runtime langsung yang umum. Gunakan untuk orkestrator yang kompatibel, bukan alur autentikasi khusus penyedia.";
     }
   }, [selectedAdapterType]);
   const connectDisabled = status === "connecting";
-  const connectLabel = connectDisabled ? "Connecting…" : "Connect";
+  const connectLabel = connectDisabled ? "Menghubungkan…" : "Hubungkan";
   const statusDotClass =
     status === "connected"
       ? "ui-dot-status-connected"
@@ -156,16 +156,16 @@ export const GatewayConnectScreen = ({
           type="button"
           className="ui-btn-icon ui-command-copy h-7 w-7 shrink-0"
           onClick={copyLocalCommand}
-          aria-label="Copy local gateway command"
-          title="Copy command"
+          aria-label="Salin perintah gateway lokal"
+          title="Salin perintah"
         >
           {copyStatus === "copied" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
         </button>
       </div>
       {copyStatus === "copied" ? (
-        <p className="text-xs text-muted-foreground">Copied</p>
+        <p className="text-xs text-muted-foreground">Tersalin</p>
       ) : copyStatus === "failed" ? (
-        <p className="ui-text-danger text-xs">Could not copy command.</p>
+        <p className="ui-text-danger text-xs">Perintah gagal disalin.</p>
       ) : (
         <p className="text-xs leading-snug text-muted-foreground">
           In a source checkout, use <span className="font-mono text-foreground">{localGatewayCommandPnpm}</span>.
@@ -177,7 +177,7 @@ export const GatewayConnectScreen = ({
   const remoteForm = (
     <div className="mt-2.5 flex flex-col gap-3">
       <label className="flex flex-col gap-1 text-[11px] font-medium text-foreground/90">
-        Upstream URL
+        URL gateway
         <input
           className="ui-input h-10 rounded-md px-4 font-sans text-sm text-foreground outline-none"
           type="text"
@@ -189,7 +189,7 @@ export const GatewayConnectScreen = ({
       </label>
 
       {urlFindings.length > 0 ? (
-        <ul className="flex flex-col gap-2" aria-label="Gateway URL warnings">
+        <ul className="flex flex-col gap-2" aria-label="Peringatan URL gateway">
           {urlFindings.map((finding) => (
             <li
               key={finding.code}
@@ -206,27 +206,27 @@ export const GatewayConnectScreen = ({
       ) : null}
 
       <div className="space-y-0.5 text-xs text-muted-foreground">
-        <p className="font-medium text-foreground">Using Tailscale?</p>
+        <p className="font-medium text-foreground">Menggunakan Tailscale?</p>
         <p>
           URL: <span className="font-mono">wss://&lt;your-tailnet-host&gt;</span>
         </p>
       </div>
 
       <label className="flex flex-col gap-1 text-[11px] font-medium text-foreground/90">
-        {tokenOptional ? "Upstream token (optional)" : "Upstream token"}
+        {tokenOptional ? "Token gateway (opsional)" : "Token gateway"}
         <div className="relative">
           <input
             className="ui-input h-10 w-full rounded-md px-4 pr-10 font-sans text-sm text-foreground outline-none"
             type={showToken ? "text" : "password"}
             value={token}
             onChange={(event) => onTokenChange(event.target.value)}
-            placeholder={tokenOptional ? "optional token" : "gateway token"}
+            placeholder={tokenOptional ? "token opsional" : "token gateway"}
             spellCheck={false}
           />
           <button
             type="button"
             className="ui-btn-icon absolute inset-y-0 right-1 my-auto h-8 w-8 border-transparent bg-transparent text-muted-foreground hover:bg-transparent hover:text-foreground"
-            aria-label={showToken ? "Hide token" : "Show token"}
+            aria-label={showToken ? "Sembunyikan token" : "Tampilkan token"}
             onClick={() => setShowToken((prev) => !prev)}
           >
             {showToken ? (
@@ -241,7 +241,7 @@ export const GatewayConnectScreen = ({
       <button
         type="button"
         className="ui-btn-primary mt-1 h-11 w-full px-4 text-xs font-semibold tracking-[0.05em] disabled:cursor-not-allowed disabled:opacity-60"
-        onClick={onConnect}
+        onClick={onHubungkan}
         disabled={connectDisabled || !gatewayUrl.trim()}
       >
         {connectLabel}
@@ -250,7 +250,7 @@ export const GatewayConnectScreen = ({
       {status === "connecting" ? (
         <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
           <RunningAvatarLoader size={16} trackWidth={32} inline />
-          Connecting…
+          Menghubungkan…
         </div>
       ) : null}
       {error ? <p className="ui-text-danger text-xs leading-snug">{error}</p> : null}
