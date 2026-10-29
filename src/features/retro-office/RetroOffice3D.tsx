@@ -6438,17 +6438,17 @@ export function RetroOffice3D({
                 {
                   key: "overview",
                   icon: <Maximize size={12} />,
-                  title: "Overview",
+                  title: "Tampilan umum",
                 },
                 {
                   key: "frontDesk",
                   icon: <Monitor size={12} />,
-                  title: "Front desk",
+                  title: "Resepsionis",
                 },
                 {
                   key: "lounge",
                   icon: <Armchair size={12} />,
-                  title: "Lounge",
+                  title: "Ruang santai",
                 },
               ] as const
             ).map(({ key, icon, title }) => (
@@ -7568,7 +7568,7 @@ export function RetroOffice3D({
 
       {/* Toolbar — top right. */}
       {!readOnly && !immersiveOverlayActive ? (
-        <div className="absolute right-2 top-12 z-20 flex max-w-[calc(100%-1rem)] flex-wrap items-center justify-end gap-1.5 sm:right-3 sm:top-3 sm:flex-nowrap sm:gap-2">
+        <div className="absolute left-2 right-2 top-16 z-20 flex max-w-[calc(100%-1rem)] flex-wrap items-center justify-end gap-1.5 sm:left-auto sm:right-3 sm:top-3 sm:max-w-none sm:flex-nowrap sm:gap-2">
           {remoteOfficeEnabled &&
           (remoteOfficeSourceKind === "presence_endpoint"
             ? remoteOfficePresenceUrl.trim().length > 0
@@ -7588,7 +7588,7 @@ export function RetroOffice3D({
               className="flex h-9 items-center justify-center gap-1 rounded-md border-2 border-black bg-[#ff4fd8] px-2 text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5 sm:h-8"
             >
               <UserPlus size={12} />
-              <span>Add</span>
+              <span>Tambah</span>
             </button>
           ) : null}
           {onRenderModeChange ? (
@@ -7615,14 +7615,14 @@ export function RetroOffice3D({
           {/* New Idea 7: Heatmap toggle. */}
           <button
             onClick={() => setHeatmapMode((p) => !p)}
-            title="Toggle heatmap"
+            title="Aktifkan peta aktivitas"
             className={`flex h-9 w-9 items-center justify-center rounded-md border-2 border-black text-black shadow-[2px_2px_0_#000] sm:h-8 sm:w-8 ${heatmapMode ? "bg-[#ffe600]" : "bg-white"}`}
           >
             <MapIcon size={12} />
           </button>
           <button
             onClick={() => setTrailMode((p) => !p)}
-            title="Toggle trails"
+            title="Aktifkan jejak agen"
             className={`flex h-9 w-9 items-center justify-center rounded-md border-2 border-black text-black shadow-[2px_2px_0_#000] sm:h-8 sm:w-8 ${trailMode ? "bg-[#ffe600]" : "bg-white"}`}
           >
             <Maximize size={12} />
@@ -7791,22 +7791,22 @@ export function RetroOffice3D({
                   key={`${ev.id}-${ev.ts}`}
                   className="flex max-w-full items-center gap-2 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-1 text-[10px] font-black text-black shadow-[3px_3px_0_#000]"
                 >
-                  <span className="text-amber-400/80 font-semibold">{ev.name}</span>
-                  <span className="text-amber-600/70">{ev.text}</span>
+                  <span className="font-semibold text-black">{ev.name}</span>
+                  <span className="text-black/80">{ev.text}</span>
                 </div>
               ))}
             {/* Ideas 6 + 8: Gateway status, agent counts, vibe score. */}
             <div className="flex max-w-full flex-wrap items-center gap-2 rounded-md border-2 border-black bg-[#ffe600] px-3 py-1 text-[10px] font-black text-black shadow-[3px_3px_0_#000]">
-              <span className="text-amber-500/60">
-                {agents.filter((a) => a.status === "working").length} working
+              <span className="text-black">
+                {agents.filter((a) => a.status === "working").length} bekerja
               </span>
               <span className="opacity-30">·</span>
-              <span className="text-amber-500/60">
-                {agents.filter((a) => a.status === "idle").length} idle
+              <span className="text-black">
+                {agents.filter((a) => a.status === "idle").length} siaga
               </span>
               <span className="opacity-30">·</span>
-              <span className="text-amber-500/60">
-                {agents.filter((a) => a.status === "error").length} error
+              <span className="text-black">
+                {agents.filter((a) => a.status === "error").length} bermasalah
               </span>
               {/* New Idea 6: Vibe score with animated EQ bars. */}
               {(() => {
@@ -7815,7 +7815,7 @@ export function RetroOffice3D({
                 ).length;
                 const ratio = workingCount / Math.max(agents.length, 1);
                 const label =
-                  ratio < 0.2 ? "quiet" : ratio < 0.6 ? "active" : "buzzing";
+                  ratio < 0.2 ? "tenang" : ratio < 0.6 ? "aktif" : "sibuk";
                 const animDur = ratio < 0.2 ? "1.8s" : ratio < 0.6 ? "1s" : "0.5s";
                 return (
                   <>
@@ -7835,7 +7835,7 @@ export function RetroOffice3D({
                         />
                       ))}
                     </span>
-                    <span className="text-amber-500/50">{label}</span>
+                    <span className="text-black">{label}</span>
                   </>
                 );
               })()}
