@@ -98,9 +98,9 @@ export function SettingsPanel({
   const gatewayStateLabel = gatewayStatus
     ? gatewayStatus.charAt(0).toUpperCase() + gatewayStatus.slice(1)
     : "Tidak diketahui";
-  const isGatewayHubungkaned = gatewayStatus === "connected";
-  const gatewayPutuskan koneksiDisabled = !isGatewayHubungkaned;
-  const gatewayHubungkanDisabled = normalizedGatewayUrl.length === 0;
+  const isGatewayConnected = gatewayStatus === "connected";
+  const gatewayDisconnectDisabled = !isGatewayConnected;
+  const gatewayConnectDisabled = normalizedGatewayUrl.length === 0;
   const tokenOptional =
     selectedAdapterType === "hermes" ||
     selectedAdapterType === "demo" ||
@@ -225,7 +225,7 @@ export function SettingsPanel({
             <button
               type="button"
               onClick={() => onGatewayConnect?.()}
-              disabled={gatewayHubungkanDisabled}
+              disabled={gatewayConnectDisabled}
               className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-cyan-50 transition-colors hover:border-cyan-400/40 hover:bg-cyan-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {gatewayStatus === "connecting" ? "Hubungkaning..." : "Hubungkan"}
@@ -233,7 +233,7 @@ export function SettingsPanel({
             <button
               type="button"
               onClick={() => onGatewayDisconnect?.()}
-              disabled={gatewayPutuskan koneksiDisabled}
+              disabled={gatewayDisconnectDisabled}
               className="rounded-md border border-rose-500/20 bg-rose-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-rose-100 transition-colors hover:border-rose-400/40 hover:bg-rose-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Putuskan koneksi gateway
