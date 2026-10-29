@@ -133,7 +133,7 @@ export function HQSidebar({
               <button
                 type="button"
                 onClick={onAddAgent}
-                className="mt-3 rounded border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-200 transition-colors hover:border-cyan-400/40 hover:text-cyan-100"
+                className="mt-3 rounded-md border-2 border-black bg-[#00f5ff] px-3 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 Tambah Agen
               </button>
@@ -142,7 +142,7 @@ export function HQSidebar({
               <button
                 type="button"
                 onClick={onOpenCompanyBuilder}
-                className="mt-2 rounded border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-200 transition-colors hover:border-emerald-400/40 hover:text-emerald-100"
+                className="mt-2 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 Bangun Perusahaan
               </button>
@@ -151,7 +151,7 @@ export function HQSidebar({
               <button
                 type="button"
                 onClick={() => onTabChange("inbox")}
-                className="mt-3 rounded border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-200 transition-colors hover:border-cyan-400/40 hover:text-cyan-100"
+                className="mt-3 rounded-md border-2 border-black bg-[#00f5ff] px-3 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5"
               >
                 Kembali ke Kantor
               </button>
@@ -184,7 +184,7 @@ export function HQSidebar({
                   >
                     <span>{TAB_LABELS[tab]}</span>
                     {showBadge ? (
-                      <span className="rounded bg-cyan-500/15 px-1.5 py-0.5 text-[10px] text-cyan-300" aria-label={`${inboxCount} unread`}>
+                      <span className="rounded border border-black bg-[#ffe600] px-1.5 py-0.5 text-[10px] font-black text-black" aria-label={`${inboxCount} unread`}>
                         {inboxCount}
                       </span>
                     ) : null}
