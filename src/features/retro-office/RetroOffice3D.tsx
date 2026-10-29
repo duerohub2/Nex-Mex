@@ -6490,7 +6490,7 @@ export function RetroOffice3D({
             <button
               type="button"
               onClick={() => openKanbanBoard(kanbanBoardItem)}
-              className="rounded-xl border border-cyan-500/22 bg-[#09111a]/90 px-3 py-2 text-left shadow-lg backdrop-blur-sm transition-colors hover:border-cyan-300/40 hover:bg-[#0d1b28]/95"
+              className="hidden rounded-xl border border-cyan-500/22 bg-[#09111a]/90 px-3 py-2 text-left shadow-lg backdrop-blur-sm transition-colors hover:border-cyan-300/40 hover:bg-[#0d1b28]/95 sm:block"
             >
               <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-200/80">
                 Kanban board
@@ -7610,7 +7610,7 @@ export function RetroOffice3D({
             }`}
             title={`Runtime: ${activeAdapterType} (${gatewayStatus})`}
           >
-            {activeAdapterType} • {gatewayStatus}
+            {activeAdapterType === "demo" ? "Demo" : activeAdapterType === "hermes" ? "Hermes" : activeAdapterType === "local" ? "Lokal" : activeAdapterType === "hermes3d" ? "Hermes3D" : "Kustom"} • {gatewayStatus === "connected" ? "Terhubung" : gatewayStatus === "connecting" ? "Menghubungkan" : "Terputus"}
           </div>
           {/* New Idea 7: Heatmap toggle. */}
           <button
@@ -7652,9 +7652,9 @@ export function RetroOffice3D({
                 <span className="text-[10px] text-amber-400/70">
                   {drag.itemType === "wall"
                     ? wallDrawStart
-                      ? "Click the end point to finish the wall."
-                      : "Click a start point, then click again to finish the wall."
-                    : "Click floor to place. Esc cancels."}
+                      ? "Pilih titik akhir untuk menyelesaikan dinding."
+                      : "Pilih titik awal, lalu titik akhir dinding."
+                    : "Ketuk lantai untuk menempatkan. Esc untuk batal."}
                 </span>
               )}
               <button
@@ -7675,7 +7675,7 @@ export function RetroOffice3D({
                 onClick={() => setDrawerOpen((p) => !p)}
                 className="px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider bg-[#2a1e14]/90 text-amber-400 border border-amber-800/30 hover:bg-[#3a2a1a] backdrop-blur-sm"
               >
-                {drawerOpen ? "Hide Objects" : "Show Objects"}
+                {drawerOpen ? "Sembunyikan Objek" : "Tampilkan Objek"}
               </button>
             </>
           )}
