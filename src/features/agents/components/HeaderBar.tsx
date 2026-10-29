@@ -77,7 +77,7 @@ export const HeaderBar = ({
                     }}
                     data-testid="gateway-settings-toggle"
                   >
-                    Gateway connection
+                    Koneksi gateway
                   </button>
                 </div>
               ) : null}
