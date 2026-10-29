@@ -99,7 +99,7 @@ export const GatewayConnectScreen = ({
   };
   const statusCopy = useMemo(() => {
     if (status === "connecting" && isLocal) {
-      return `Local gateway detected on port ${localPort}. Connecting…`;
+      return `Gateway lokal terdeteksi pada port ${localPort}. Menghubungkan…`;
     }
     if (status === "connecting") {
       return "Menghubungkan ke gateway jarak jauh…";
@@ -112,18 +112,18 @@ export const GatewayConnectScreen = ({
   const selectedAdapterHint = useMemo(() => {
     switch (selectedAdapterType) {
       case "hermes":
-        return "Hermes is the agent runtime path with its own provider/account flow behind the gateway.";
+        return "Hermes adalah jalur runtime agen dengan alur penyedia/akun tersendiri di balik gateway.";
       case "hermes-agent":
-        return "Hermes Agent connects straight to a hermes-agent backend's JSON-RPC gateway — no adapter process. Point it at the server root (Studio appends /api/ws) and use the session token, not a dashboard login.";
+        return "Hermes Agent terhubung langsung ke gateway JSON-RPC hermes-agent tanpa proses adapter. Arahkan ke alamat utama server (Studio menambahkan /api/ws) dan gunakan token sesi, bukan login dasbor.";
       case "demo":
-        return "Demo can fall back to a seeded main agent locally, or connect to the bundled mock gateway for streaming replies.";
+        return "Mode demo dapat memakai agen utama contoh secara lokal atau terhubung ke gateway tiruan untuk balasan langsung.";
       case "local":
-        return "Local runtime expects a direct HTTP runtime/orchestrator boundary, not a provider catalog.";
+        return "Runtime lokal memerlukan koneksi HTTP langsung ke runtime/orchestrator, bukan katalog penyedia.";
       case "hermes3d":
-        return "Hermes3D runtime preserves Hermes3D transcript conventions over the direct runtime seam.";
+        return "Runtime Hermes3D mempertahankan format percakapan Hermes3D melalui koneksi runtime langsung.";
       case "custom":
       default:
-        return "Custom is the generic direct runtime seam. Use it for compatible orchestrators, not for provider-specific auth flows.";
+        return "Kustom adalah koneksi runtime langsung yang umum. Gunakan untuk orkestrator yang kompatibel, bukan alur autentikasi khusus penyedia.";
     }
   }, [selectedAdapterType]);
   const connectDisabled = status === "connecting";
@@ -156,8 +156,8 @@ export const GatewayConnectScreen = ({
           type="button"
           className="ui-btn-icon ui-command-copy h-7 w-7 shrink-0"
           onClick={copyLocalCommand}
-          aria-label="Copy local gateway command"
-          title="Copy command"
+          aria-label="Salin perintah gateway lokal"
+          title="Salin perintah"
         >
           {copyStatus === "copied" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
         </button>
@@ -189,7 +189,7 @@ export const GatewayConnectScreen = ({
       </label>
 
       {urlFindings.length > 0 ? (
-        <ul className="flex flex-col gap-2" aria-label="Gateway URL warnings">
+        <ul className="flex flex-col gap-2" aria-label="Peringatan URL gateway">
           {urlFindings.map((finding) => (
             <li
               key={finding.code}
@@ -275,10 +275,10 @@ export const GatewayConnectScreen = ({
       {renderMode && onRenderModeChange ? (
         <div className="ui-card px-4 py-4 sm:px-6">
           <p className="font-mono text-[10px] font-medium tracking-[0.06em] text-muted-foreground">
-            Office renderer
+            Tampilan kantor
           </p>
           <p className="mt-2 text-sm text-foreground/90">
-            Pick before connecting — nothing heavy loads until you do.
+            Pilih sebelum menghubungkan — proses berat belum dimuat sebelum pilihan dibuat.
           </p>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             {OFFICE_RENDER_MODE_OPTIONS.map((option) => {
@@ -313,13 +313,13 @@ export const GatewayConnectScreen = ({
       <div className="ui-card px-4 py-5 sm:px-6">
         <div>
           <p className="font-mono text-[10px] font-medium tracking-[0.06em] text-muted-foreground">
-            Remote gateway (recommended)
+            Gateway jarak jauh (disarankan)
           </p>
           <p className="mt-2 text-sm text-foreground/90">
-            Choose a backend, then connect to its gateway URL.
+            Pilih backend, lalu hubungkan ke URL gateway-nya.
           </p>
           <p className="mt-2 font-mono text-[11px] text-muted-foreground">
-            Selected backend: {selectedAdapterType} | Active backend: {activeAdapterType}
+            Backend terpilih: {selectedAdapterType} | Backend aktif: {activeAdapterType}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             Each backend keeps its own saved URL and token.
@@ -333,42 +333,42 @@ export const GatewayConnectScreen = ({
               className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
               onClick={useDemoPreset}
             >
-              Demo backend
+              Backend demo
             </button>
             <button
               type="button"
               className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
               onClick={useHermesPreset}
             >
-              Hermes backend
+              Backend Hermes
             </button>
             <button
               type="button"
               className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
               onClick={useHermesAgentPreset}
             >
-              Hermes Agent (direct)
+              Hermes Agent (langsung)
             </button>
             <button
               type="button"
               className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
               onClick={useLocalPreset}
             >
-              Local runtime
+              Runtime lokal
             </button>
             <button
               type="button"
               className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
               onClick={useHermes3dPreset}
             >
-              Hermes3D runtime
+              Runtime Hermes3D
             </button>
             <button
               type="button"
               className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
               onClick={useCustomPreset}
             >
-              Custom backend
+              Backend kustom
             </button>
           </div>
         </div>
@@ -390,23 +390,23 @@ export const GatewayConnectScreen = ({
             <p className="text-xs font-medium text-foreground">Just want to see the office?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
               Run <span className="font-mono text-foreground">{localDemoCommand}</span> to start a built-in mock gateway with demo agents.
-              Then choose <span className="font-mono text-foreground">Demo backend</span> and connect.
+              Then choose <span className="font-mono text-foreground">Backend demo</span> and connect.
             </p>
           </div>
           <div className="rounded-md border border-border bg-muted/30 px-3 py-3">
             <p className="text-xs font-medium text-foreground">Using Hermes locally?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
               Run <span className="font-mono text-foreground">npm run hermes-adapter</span>, then choose
-              <span className="font-mono text-foreground"> Hermes backend</span>. The default local URL is
+              <span className="font-mono text-foreground"> Backend Hermes</span>. The default local URL is
               <span className="font-mono text-foreground"> ws://localhost:18789</span>.
             </p>
           </div>
           <div className="rounded-md border border-border bg-muted/30 px-3 py-3">
             <p className="text-xs font-medium text-foreground">Using a local or custom runtime?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Choose <span className="font-mono text-foreground">Local runtime</span>,
-              <span className="font-mono text-foreground"> Hermes3D runtime</span>, or
-              <span className="font-mono text-foreground"> Custom backend</span> and point the URL at
+              Choose <span className="font-mono text-foreground">Runtime lokal</span>,
+              <span className="font-mono text-foreground"> Runtime Hermes3D</span>, or
+              <span className="font-mono text-foreground"> Backend kustom</span> and point the URL at
               your orchestrator or runtime boundary. These profiles already preserve separate saved URLs
               and tokens, but transport-specific chat handoff still needs a follow-up slice.
             </p>
