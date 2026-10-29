@@ -4998,7 +4998,7 @@ export function OfficeScreen({
         <section className="pointer-events-auto fixed bottom-2 left-2 right-2 z-30 flex max-h-[34dvh] w-auto flex-col overflow-hidden rounded-xl border-2 border-black bg-[#fff8e7]/95 text-black shadow-[5px_5px_0_#000] backdrop-blur sm:bottom-3 sm:left-3 sm:right-auto sm:max-h-[42dvh] sm:w-[520px]">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-black bg-[#00f5ff] px-2 py-2 font-mono text-[10px] font-black uppercase tracking-[0.08em] text-black sm:px-3 sm:text-[11px] sm:tracking-[0.12em]">
             <span>Konsol Aktivitas Agen</span>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-end gap-1.5">
               <span className="text-[9px] font-bold text-black/70 sm:text-[10px]">
                 agen {state.agents.length} | aktivitas{" "}
                 {filteredHermesLogEntries.length}/{hermesLogEntries.length}
@@ -5042,8 +5042,8 @@ export function OfficeScreen({
             </div>
           </div>
           {!hermesConsoleCollapsed ? (
-            <div className="flex h-[320px] flex-col gap-3 overflow-y-auto bg-[#02090b]/96 px-3 py-2 font-mono text-[10px] leading-4">
-            <div className="rounded border border-cyan-500/10 bg-cyan-950/10 p-2">
+            <div className="flex min-h-0 max-h-[28dvh] flex-col gap-3 overflow-y-auto bg-[#fff8e7] px-2 py-2 font-mono text-[10px] leading-4 text-black sm:h-[320px] sm:max-h-none sm:px-3">
+            <div className="rounded-lg border-2 border-black bg-white p-2 shadow-[2px_2px_0_#000]">
               <div className="flex items-center gap-2">
                 <input
                   type="text"
@@ -5052,13 +5052,13 @@ export function OfficeScreen({
                     setHermesConsoleSearch(event.target.value)
                   }
                   placeholder="Search logs, payloads, thinking, user text."
-                  className="min-w-0 flex-1 rounded border border-cyan-500/20 bg-black/35 px-2 py-1 text-[10px] normal-case tracking-normal text-cyan-50 placeholder:text-cyan-100/30 focus:border-cyan-400/40 focus:outline-none"
+                  className="min-w-0 flex-1 rounded border-2 border-black bg-white px-2 py-2 text-[10px] normal-case tracking-normal text-black placeholder:text-black/45 focus:outline-none"
                 />
                 {hermesConsoleSearch ? (
                   <button
                     type="button"
                     onClick={() => setHermesConsoleSearch("")}
-                    className="rounded border border-cyan-500/20 px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
+                    className="rounded border-2 border-black bg-[#00f5ff] px-2 py-1 text-[9px] font-black uppercase tracking-[0.08em] text-black shadow-[2px_2px_0_#000]"
                   >
                     Reset
                   </button>
@@ -5066,7 +5066,7 @@ export function OfficeScreen({
               </div>
             </div>
             {hermesLiveStateMatchesSearch ? (
-              <div className="rounded border border-cyan-500/10 bg-cyan-950/10 p-2">
+              <div className="rounded-lg border-2 border-black bg-white p-2 shadow-[2px_2px_0_#000]">
                 <div className="mb-1 text-[9px] uppercase tracking-[0.16em] text-cyan-300/70">
                   Live Hermes State
                 </div>
