@@ -7,7 +7,7 @@ import { CalendarDays } from "lucide-react";
 import type { AgentState } from "@/features/agents/state/store";
 import { useApprovalMetrics } from "@/features/office/hooks/useApprovalMetrics";
 import { useOfficeUsageAnalyticsViewModel } from "@/features/office/hooks/useOfficeUsageAnalyticsViewModel";
-import { usePerformanceAnalytics } from "@/features/office/hooks/usePerformanceAnalytics";
+import { useKinerjaAnalytics } from "@/features/office/hooks/useKinerjaAnalytics";
 import type { RunRecord } from "@/features/office/hooks/useRunLog";
 import type { GatewayClient, GatewayStatus } from "@/lib/gateway/GatewayClient";
 import {
@@ -17,12 +17,12 @@ import {
 import type { StudioSettingsCoordinator } from "@/lib/studio/coordinator";
 
 const formatPercent = (value: number | null | undefined) => {
-  if (value === null || value === undefined) return "n/a";
+  if (value === null || value === undefined) return "tidak tersedia";
   return `${Math.round(value * 100)}%`;
 };
 
 const formatDuration = (valueMs: number | null | undefined) => {
-  if (!valueMs) return "n/a";
+  if (!valueMs) return "tidak tersedia";
   const seconds = Math.round(valueMs / 1000);
   if (seconds < 60) return `${seconds}s`;
   const minutes = Math.floor(seconds / 60);
@@ -35,9 +35,9 @@ const formatDuration = (valueMs: number | null | undefined) => {
   return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
 };
 
-const formatBudgetInput = (value: number | null) => (value === null ? "" : String(value));
+const formatAnggaranInput = (value: number | null) => (value === null ? "" : String(value));
 
-const parseBudgetInput = (value: string): number | null => {
+const parseAnggaranInput = (value: string): number | null => {
   const trimmed = value.trim();
   if (!trimmed) return null;
   const parsed = Number(trimmed);
@@ -135,7 +135,7 @@ export function AnalyticsPanel({
     budgets,
     settingsLoaded,
     usage,
-    updateBudget,
+    updateAnggaran,
   } = useOfficeUsageAnalyticsViewModel({
     client,
     status,
@@ -150,7 +150,7 @@ export function AnalyticsPanel({
     enabled: approvalsEnabled,
     agents,
   });
-  const performance = usePerformanceAnalytics({
+  const performance = useKinerjaAnalytics({
     agents,
     runLog,
     approvalByAgent: approvalMetrics.byAgent,
@@ -213,7 +213,7 @@ export function AnalyticsPanel({
           </div>
         ) : settingsLoaded ? (
           <div className="mt-3 rounded border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 font-mono text-[11px] text-emerald-100">
-            Budgets are within threshold.
+            Anggarans are within threshold.
           </div>
         ) : null}
 
@@ -224,8 +224,8 @@ export function AnalyticsPanel({
             hint="Selected range."
           />
           <StatCard
-            label="Total Tokens"
-            value={formatNumber(usage.totals.totalTokens)}
+            label="Total Token"
+            value={formatNumber(usage.totals.totalToken)}
             hint="Input + output + cache."
           />
           <StatCard
@@ -242,15 +242,15 @@ export function AnalyticsPanel({
 
         <div className="mt-5 rounded border border-white/8 bg-white/[0.03] px-3 py-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">
-            Budget Limits
+            Anggaran Limits
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2">
             <label className="flex flex-col gap-1">
               <span className="font-mono text-[10px] text-white/35">Daily USD</span>
               <input
-                value={formatBudgetInput(budgets.dailySpendLimitUsd)}
+                value={formatAnggaranInput(budgets.dailySpendLimitUsd)}
                 onChange={(event) =>
-                  updateBudget("dailySpendLimitUsd", parseBudgetInput(event.target.value))
+                  updateAnggaran("dailySpendLimitUsd", parseAnggaranInput(event.target.value))
                 }
                 placeholder="No limit"
                 inputMode="decimal"
@@ -260,9 +260,9 @@ export function AnalyticsPanel({
             <label className="flex flex-col gap-1">
               <span className="font-mono text-[10px] text-white/35">Monthly USD</span>
               <input
-                value={formatBudgetInput(budgets.monthlySpendLimitUsd)}
+                value={formatAnggaranInput(budgets.monthlySpendLimitUsd)}
                 onChange={(event) =>
-                  updateBudget("monthlySpendLimitUsd", parseBudgetInput(event.target.value))
+                  updateAnggaran("monthlySpendLimitUsd", parseAnggaranInput(event.target.value))
                 }
                 placeholder="No limit"
                 inputMode="decimal"
@@ -272,9 +272,9 @@ export function AnalyticsPanel({
             <label className="flex flex-col gap-1">
               <span className="font-mono text-[10px] text-white/35">Per-agent USD</span>
               <input
-                value={formatBudgetInput(budgets.perAgentSoftLimitUsd)}
+                value={formatAnggaranInput(budgets.perAgentSoftLimitUsd)}
                 onChange={(event) =>
-                  updateBudget("perAgentSoftLimitUsd", parseBudgetInput(event.target.value))
+                  updateAnggaran("perAgentSoftLimitUsd", parseAnggaranInput(event.target.value))
                 }
                 placeholder="Soft limit"
                 inputMode="decimal"
@@ -286,9 +286,9 @@ export function AnalyticsPanel({
               <input
                 value={String(budgets.alertThresholdPct)}
                 onChange={(event) =>
-                  updateBudget(
+                  updateAnggaran(
                     "alertThresholdPct",
-                    Math.min(100, Math.max(1, parseBudgetInput(event.target.value) ?? 80))
+                    Math.min(100, Math.max(1, parseAnggaranInput(event.target.value) ?? 80))
                   )
                 }
                 inputMode="numeric"
@@ -396,7 +396,7 @@ export function AnalyticsPanel({
 
         <div className="mt-5 rounded border border-white/8 bg-white/[0.03] px-3 py-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">
-            Performance
+            Kinerja
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2">
             <StatCard
