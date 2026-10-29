@@ -18,8 +18,8 @@ type SettingsPanelProps = {
   gatewayToken?: string;
   selectedAdapterType?: StudioGatewayAdapterType;
   activeAdapterType?: StudioGatewayAdapterType;
-  onGatewayPutuskan koneksi?: () => void;
-  onGatewayHubungkan?: () => void;
+  onGatewayDisconnect?: () => void;
+  onGatewayConnect?: () => void;
   onGatewayUrlChange?: (value: string) => void;
   onGatewayTokenChange?: (value: string) => void;
   onGatewayAdapterTypeChange?: (value: StudioGatewayAdapterType) => void;
@@ -59,8 +59,8 @@ export function SettingsPanel({
   gatewayToken,
   selectedAdapterType = "hermes",
   activeAdapterType = "hermes",
-  onGatewayPutuskan koneksi,
-  onGatewayHubungkan,
+  onGatewayDisconnect,
+  onGatewayConnect,
   onGatewayUrlChange,
   onGatewayTokenChange,
   onGatewayAdapterTypeChange,
@@ -224,7 +224,7 @@ export function SettingsPanel({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => onGatewayHubungkan?.()}
+              onClick={() => onGatewayConnect?.()}
               disabled={gatewayHubungkanDisabled}
               className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-cyan-50 transition-colors hover:border-cyan-400/40 hover:bg-cyan-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
@@ -232,7 +232,7 @@ export function SettingsPanel({
             </button>
             <button
               type="button"
-              onClick={() => onGatewayPutuskan koneksi?.()}
+              onClick={() => onGatewayDisconnect?.()}
               disabled={gatewayPutuskan koneksiDisabled}
               className="rounded-md border border-rose-500/20 bg-rose-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-rose-100 transition-colors hover:border-rose-400/40 hover:bg-rose-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
