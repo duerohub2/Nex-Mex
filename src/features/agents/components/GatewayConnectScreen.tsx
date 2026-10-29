@@ -127,7 +127,7 @@ export const GatewayConnectScreen = ({
     }
   }, [selectedAdapterType]);
   const connectDisabled = status === "connecting";
-  const connectLabel = connectDisabled ? "Connecting…" : "Hubungkan";
+  const connectLabel = connectDisabled ? "Menghubungkan…" : "Hubungkan";
   const statusDotClass =
     status === "connected"
       ? "ui-dot-status-connected"
@@ -163,12 +163,12 @@ export const GatewayConnectScreen = ({
         </button>
       </div>
       {copyStatus === "copied" ? (
-        <p className="text-xs text-muted-foreground">Copied</p>
+        <p className="text-xs text-muted-foreground">Berhasil disalin</p>
       ) : copyStatus === "failed" ? (
-        <p className="ui-text-danger text-xs">Could not copy command.</p>
+        <p className="ui-text-danger text-xs">Perintah gagal disalin.</p>
       ) : (
         <p className="text-xs leading-snug text-muted-foreground">
-          In a source checkout, use <span className="font-mono text-foreground">{localGatewayCommandPnpm}</span>.
+          Jika menjalankan dari kode sumber, gunakan <span className="font-mono text-foreground">{localGatewayCommandPnpm}</span>.
         </p>
       )}
     </div>
@@ -177,9 +177,9 @@ export const GatewayConnectScreen = ({
   const remoteForm = (
     <div className="mt-2.5 flex flex-col gap-3">
       <label className="flex flex-col gap-1 text-[11px] font-medium text-foreground/90">
-        Upstream URL
+        URL Gateway
         <input
-          className="ui-input h-10 rounded-md px-4 font-sans text-sm text-foreground outline-none"
+          className="h-11 w-full rounded-md border-2 border-black bg-white px-3 font-sans text-sm text-black outline-none focus:ring-2 focus:ring-[#00f5ff]"
           type="text"
           value={gatewayUrl}
           onChange={(event) => onGatewayUrlChange(event.target.value)}
@@ -216,11 +216,11 @@ export const GatewayConnectScreen = ({
         {tokenOptional ? "Token gateway (opsional)" : "Token gateway"}
         <div className="relative">
           <input
-            className="ui-input h-10 w-full rounded-md px-4 pr-10 font-sans text-sm text-foreground outline-none"
+            className="h-11 w-full rounded-md border-2 border-black bg-white px-3 pr-10 font-sans text-sm text-black outline-none focus:ring-2 focus:ring-[#00f5ff]"
             type={showToken ? "text" : "password"}
             value={token}
             onChange={(event) => onTokenChange(event.target.value)}
-            placeholder={tokenOptional ? "optional token" : "gateway token"}
+            placeholder={tokenOptional ? "token opsional" : "token gateway"}
             spellCheck={false}
           />
           <button
@@ -240,7 +240,7 @@ export const GatewayConnectScreen = ({
 
       <button
         type="button"
-        className="ui-btn-primary mt-1 h-11 w-full px-4 text-xs font-semibold tracking-[0.05em] disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 h-12 w-full rounded-md border-2 border-black bg-[#00f5ff] px-4 text-xs font-black tracking-[0.05em] text-black shadow-[4px_4px_0_#000] disabled:cursor-not-allowed disabled:opacity-60"
         onClick={onConnect}
         disabled={connectDisabled || !gatewayUrl.trim()}
       >
@@ -250,7 +250,7 @@ export const GatewayConnectScreen = ({
       {status === "connecting" ? (
         <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
           <RunningAvatarLoader size={16} trackWidth={32} inline />
-          Connecting…
+          Menghubungkan…
         </div>
       ) : null}
       {error ? <p className="ui-text-danger text-xs leading-snug">{error}</p> : null}
@@ -258,8 +258,8 @@ export const GatewayConnectScreen = ({
   );
 
   return (
-    <div className="mx-auto flex min-h-0 w-full max-w-[820px] flex-1 flex-col gap-5">
-      <div className="ui-card px-4 py-2">
+    <div className="nex-pop-connect mx-auto flex min-h-0 w-full max-w-[820px] flex-1 flex-col gap-4 px-2 pb-6 sm:gap-5 sm:px-0">
+      <div className="ui-card rounded-xl border-2 border-black bg-[#00f5ff] px-3 py-3 text-black shadow-[5px_5px_0_#000] sm:px-4">
         <div className="flex items-center gap-2">
           {status === "connecting" ? (
             <RunningAvatarLoader size={18} trackWidth={36} inline />
@@ -273,7 +273,7 @@ export const GatewayConnectScreen = ({
       </div>
 
       {renderMode && onRenderModeChange ? (
-        <div className="ui-card px-4 py-4 sm:px-6">
+        <div className="ui-card rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-4 text-black shadow-[-5px_5px_0_#000] sm:px-6">
           <p className="font-mono text-[10px] font-medium tracking-[0.06em] text-muted-foreground">
             Tampilan kantor
           </p>
@@ -291,8 +291,8 @@ export const GatewayConnectScreen = ({
                   data-testid={`connect-render-mode-${option.id}`}
                   className={`rounded-md border px-3 py-2.5 text-left transition-colors ${
                     selected
-                      ? "border-amber-500/70 bg-amber-500/10"
-                      : "border-border bg-muted/30 hover:border-amber-500/35"
+                      ? "border-2 border-black bg-[#ffe600] shadow-[3px_3px_0_#000]"
+                      : "border-2 border-black bg-white hover:bg-[#00f5ff]"
                   }`}
                   onClick={() => onRenderModeChange(option.id)}
                 >
@@ -310,7 +310,7 @@ export const GatewayConnectScreen = ({
         </div>
       ) : null}
 
-      <div className="ui-card px-4 py-5 sm:px-6">
+      <div className="ui-card rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-4 text-black shadow-[-5px_5px_0_#000] sm:px-6 sm:py-5">
         <div>
           <p className="font-mono text-[10px] font-medium tracking-[0.06em] text-muted-foreground">
             Gateway jarak jauh (disarankan)
@@ -322,7 +322,7 @@ export const GatewayConnectScreen = ({
             Backend terpilih: {selectedAdapterType} | Backend aktif: {activeAdapterType}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Each backend keeps its own saved URL and token.
+            Setiap backend menyimpan URL dan tokennya masing-masing.
           </p>
           <p className="mt-2 text-xs leading-snug text-muted-foreground">
             {selectedAdapterHint}
@@ -330,42 +330,42 @@ export const GatewayConnectScreen = ({
           <div className="mt-3 flex flex-wrap gap-2">
             <button
               type="button"
-              className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
+              className="min-h-10 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 text-[11px] font-black tracking-[0.03em] text-black shadow-[3px_3px_0_#000]"
               onClick={useDemoPreset}
             >
               Backend demo
             </button>
             <button
               type="button"
-              className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
+              className="min-h-10 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 text-[11px] font-black tracking-[0.03em] text-black shadow-[3px_3px_0_#000]"
               onClick={useHermesPreset}
             >
               Backend Hermes
             </button>
             <button
               type="button"
-              className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
+              className="min-h-10 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 text-[11px] font-black tracking-[0.03em] text-black shadow-[3px_3px_0_#000]"
               onClick={useHermesAgentPreset}
             >
               Hermes Agent (langsung)
             </button>
             <button
               type="button"
-              className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
+              className="min-h-10 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 text-[11px] font-black tracking-[0.03em] text-black shadow-[3px_3px_0_#000]"
               onClick={useLocalPreset}
             >
               Runtime lokal
             </button>
             <button
               type="button"
-              className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
+              className="min-h-10 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 text-[11px] font-black tracking-[0.03em] text-black shadow-[3px_3px_0_#000]"
               onClick={useHermes3dPreset}
             >
               Runtime Hermes3D
             </button>
             <button
               type="button"
-              className="ui-btn-secondary px-3 py-1.5 text-[11px] font-semibold tracking-[0.05em]"
+              className="min-h-10 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-2 text-[11px] font-black tracking-[0.03em] text-black shadow-[3px_3px_0_#000]"
               onClick={useCustomPreset}
             >
               Backend kustom
@@ -375,34 +375,34 @@ export const GatewayConnectScreen = ({
         {remoteForm}
       </div>
 
-      <div className="ui-card px-4 py-4 sm:px-6 sm:py-5">
+      <div className="ui-card rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-4 text-black shadow-[-5px_5px_0_#000] sm:px-6 sm:py-5">
         <div className="space-y-1.5">
           <p className="font-mono text-[10px] font-semibold tracking-[0.06em] text-muted-foreground">
-            Run locally (optional)
+            Jalankan secara lokal (opsional)
           </p>
           <p className="text-sm text-foreground/90">
-            Start a local gateway process on this machine, then connect.
+            Jalankan proses gateway lokal di perangkat ini, lalu hubungkan.
           </p>
         </div>
         <div className="mt-3 space-y-3">
           {commandField}
           <div className="rounded-md border border-border bg-muted/30 px-3 py-3">
-            <p className="text-xs font-medium text-foreground">Just want to see the office?</p>
+            <p className="text-xs font-medium text-foreground">Hanya ingin melihat kantor?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Run <span className="font-mono text-foreground">{localDemoCommand}</span> to start a built-in mock gateway with demo agents.
+              Jalankan <span className="font-mono text-foreground">{localDemoCommand}</span> untuk menjalankan gateway tiruan bawaan dengan agen demo.
               Then choose <span className="font-mono text-foreground">Backend demo</span> and connect.
             </p>
           </div>
           <div className="rounded-md border border-border bg-muted/30 px-3 py-3">
-            <p className="text-xs font-medium text-foreground">Using Hermes locally?</p>
+            <p className="text-xs font-medium text-foreground">Menggunakan Hermes secara lokal?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
-              Run <span className="font-mono text-foreground">npm run hermes-adapter</span>, then choose
+              Jalankan <span className="font-mono text-foreground">npm run hermes-adapter</span>, then choose
               <span className="font-mono text-foreground"> Backend Hermes</span>. The default local URL is
               <span className="font-mono text-foreground"> ws://localhost:18789</span>.
             </p>
           </div>
           <div className="rounded-md border border-border bg-muted/30 px-3 py-3">
-            <p className="text-xs font-medium text-foreground">Using a local or custom runtime?</p>
+            <p className="text-xs font-medium text-foreground">Menggunakan runtime lokal atau kustom?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
               Choose <span className="font-mono text-foreground">Runtime lokal</span>,
               <span className="font-mono text-foreground"> Runtime Hermes3D</span>, or
@@ -412,7 +412,7 @@ export const GatewayConnectScreen = ({
             </p>
           </div>
           <div className="rounded-md border border-border bg-muted/30 px-3 py-3">
-            <p className="text-xs font-medium text-foreground">Opening Hermes3D from another machine?</p>
+            <p className="text-xs font-medium text-foreground">Membuka Hermes3D dari perangkat lain?</p>
             <p className="mt-1 text-xs leading-snug text-muted-foreground">
               Start Studio with <span className="font-mono text-foreground">HOST=0.0.0.0</span> (or a
               specific LAN/Tailscale host) and set
@@ -425,7 +425,7 @@ export const GatewayConnectScreen = ({
             <div className="ui-input rounded-md px-3 py-3">
               <div className="space-y-2">
                 <p className="text-xs text-muted-foreground">
-                  Use token from <span className="font-mono">~/.hermes/hermes.json</span>.
+                  Gunakan token dari <span className="font-mono">~/.hermes/hermes.json</span>.
                 </p>
                 <p className="font-mono text-[11px] text-foreground">
                   {localGatewayDefaults.url}
@@ -435,7 +435,7 @@ export const GatewayConnectScreen = ({
                   className="ui-btn-secondary h-9 w-full px-3 text-xs font-semibold tracking-[0.05em]"
                   onClick={onUseLocalDefaults}
                 >
-                  Use local defaults
+                  Gunakan pengaturan lokal bawaan
                 </button>
               </div>
             </div>
