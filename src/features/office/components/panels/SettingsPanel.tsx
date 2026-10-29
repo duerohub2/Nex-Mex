@@ -178,7 +178,7 @@ export function SettingsPanel({
         <div className="mt-3 grid gap-3">
           <div>
             <div className="mb-1 text-[10px] uppercase tracking-[0.14em] text-cyan-100/65">
-              Upstream URL
+              URL Gateway
             </div>
             <input
               type="text"
@@ -266,9 +266,9 @@ export function SettingsPanel({
               <span className="ui-switch-thumb" />
             </button>
             <div className="flex flex-col">
-              <span className="text-[11px] font-medium text-white">Show second office</span>
+              <span className="text-[11px] font-medium text-white">Tampilkan kantor kedua</span>
               <span className="text-[10px] text-white/80">
-                Remote agents stay visible but non-interactive.
+                Agen jarak jauh tetap terlihat, tetapi tidak dapat dikendalikan.
               </span>
             </div>
           </div>
