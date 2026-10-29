@@ -4997,10 +4997,10 @@ export function OfficeScreen({
       {showHermesConsole ? (
         <section className="pointer-events-auto fixed bottom-3 left-3 z-30 flex w-[520px] max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded border border-cyan-500/25 bg-black/78 shadow-2xl backdrop-blur">
           <div className="flex items-center justify-between border-b border-cyan-500/15 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-200/80">
-            <span>Agent Event Console</span>
+            <span>Konsol Aktivitas Agen</span>
             <div className="flex items-center gap-2">
               <span className="text-[10px] text-cyan-100/45">
-                agents {state.agents.length} | events{" "}
+                agen {state.agents.length} | aktivitas{" "}
                 {filteredHermesLogEntries.length}/{hermesLogEntries.length}
               </span>
               <button
@@ -5013,15 +5013,15 @@ export function OfficeScreen({
                 {hermesConsoleCopyStatus === "copied"
                   ? "Copied"
                   : hermesConsoleCopyStatus === "error"
-                    ? "Copy Failed"
-                    : "Copy JSON"}
+                    ? "Gagal Menyalin"
+                    : "Salin JSON"}
               </button>
               <button
                 type="button"
                 onClick={handleDownloadHermesConsoleJson}
                 className="rounded border border-cyan-500/20 px-2 py-0.5 text-[9px] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
               >
-                Download JSON
+                Unduh JSON
               </button>
               <button
                 type="button"
@@ -5037,7 +5037,7 @@ export function OfficeScreen({
                 }
                 className="rounded border border-cyan-500/20 px-2 py-0.5 text-[9px] text-cyan-100/70 transition-colors hover:border-cyan-400/45 hover:text-cyan-50"
               >
-                {hermesConsoleCollapsed ? "Expand" : "Minimize"}
+                {hermesConsoleCollapsed ? "Perluas" : "Perkecil"}
               </button>
             </div>
           </div>
@@ -5088,8 +5088,8 @@ export function OfficeScreen({
             {filteredHermesLogEntries.length === 0 ? (
               <div className="rounded border border-cyan-500/10 bg-cyan-950/10 p-2 text-cyan-100/45">
                 {hermesLogEntries.length === 0
-                  ? "No Hermes gateway events received yet."
-                  : "No Hermes events match the current search."}
+                  ? "Belum ada aktivitas dari gateway Hermes."
+                  : "Tidak ada aktivitas Hermes yang cocok dengan pencarian ini."}
               </div>
             ) : (
               filteredHermesLogEntries.map((entry) => {
@@ -5246,8 +5246,8 @@ export function OfficeScreen({
                 type="button"
                 onClick={() => setChatRosterCollapsed((current) => !current)}
                 className="mx-2 mt-2 inline-flex items-center justify-center rounded border border-white/10 bg-white/5 px-2 py-2 text-white/65 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
-                aria-label={chatRosterCollapsed ? "Expand agent list" : "Collapse agent list"}
-                title={chatRosterCollapsed ? "Expand agent list" : "Collapse agent list"}
+                aria-label={chatRosterCollapsed ? "Perluas daftar agen" : "Collapse agent list"}
+                title={chatRosterCollapsed ? "Perluas daftar agen" : "Collapse agent list"}
               >
                 {chatRosterCollapsed ? (
                   <ChevronRight className="h-4 w-4" />
@@ -5308,7 +5308,7 @@ export function OfficeScreen({
                           </span>
                         ) : null}
                         <span className="sr-only">
-                          {agent.kind === "remote" ? "Remote agent" : "Local agent"}
+                          {agent.kind === "remote" ? "Agen jarak jauh" : "Agen lokal"}
                         </span>
                       </button>
                     );
