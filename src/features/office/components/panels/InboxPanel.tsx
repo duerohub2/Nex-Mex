@@ -5,9 +5,9 @@ import { useMemo } from "react";
 import type { AgentState } from "@/features/agents/state/store";
 
 const formatRelativeTime = (timestampMs: number | null) => {
-  if (!timestampMs) return "No output yet";
+  if (!timestampMs) return "Belum ada keluaran";
   const deltaMs = Date.now() - timestampMs;
-  if (deltaMs < 60_000) return "Just now";
+  if (deltaMs < 60_000) return "Baru saja";
   if (deltaMs < 3_600_000) return `${Math.max(1, Math.floor(deltaMs / 60_000))}m ago`;
   if (deltaMs < 86_400_000) return `${Math.max(1, Math.floor(deltaMs / 3_600_000))}h ago`;
   return `${Math.max(1, Math.floor(deltaMs / 86_400_000))}d ago`;
