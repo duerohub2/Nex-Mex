@@ -66,11 +66,11 @@ export function HQSidebar({
 
   return (
     <aside className="pointer-events-none fixed inset-y-0 right-0 z-40 flex justify-end">
-      <div className="pointer-events-auto mt-16 flex shrink-0 flex-col items-end gap-2 pr-0">
+      <div className="pointer-events-auto mt-56 flex shrink-0 flex-col items-end gap-2 pr-0 sm:mt-16">
         <button
           type="button"
           onClick={onToggle}
-          className="rounded-l-lg border-2 border-r-0 border-black bg-[#00f5ff] px-2 py-3 font-mono text-[10px] font-black tracking-[0.12em] text-black shadow-[-4px_4px_0_#000] transition-transform hover:-translate-x-1"
+          className="max-w-10 rounded-l-lg border-2 border-r-0 border-black bg-[#00f5ff] px-1.5 py-3 font-mono text-[9px] font-black tracking-[0.08em] text-black shadow-[-3px_3px_0_#000] transition-transform hover:-translate-x-1 sm:max-w-none sm:px-2 sm:text-[10px] sm:tracking-[0.12em] sm:shadow-[-4px_4px_0_#000]"
           aria-expanded={open}
           aria-label={open ? "Tutup panel kantor pusat" : "Buka panel kantor pusat"}
         >
@@ -84,7 +84,7 @@ export function HQSidebar({
           onClick={() => {
             onOpenMarketplace();
           }}
-          className="rounded-l-lg border-2 border-r-0 border-black bg-[#ff4fd8] px-2 py-3 font-mono text-[10px] font-black tracking-[0.12em] text-black shadow-[-4px_4px_0_#000] transition-transform hover:-translate-x-1"
+          className="max-w-10 rounded-l-lg border-2 border-r-0 border-black bg-[#ff4fd8] px-1.5 py-3 font-mono text-[9px] font-black tracking-[0.08em] text-black shadow-[-3px_3px_0_#000] transition-transform hover:-translate-x-1 sm:max-w-none sm:px-2 sm:text-[10px] sm:tracking-[0.12em] sm:shadow-[-4px_4px_0_#000]"
           aria-label="Buka pasar keterampilan"
         >
           <span className="block leading-none [writing-mode:vertical-rl]">
