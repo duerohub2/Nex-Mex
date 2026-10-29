@@ -6431,8 +6431,8 @@ export function RetroOffice3D({
 
       {/* New Idea 2: Camera preset buttons — top left. */}
       {!readOnly && !immersiveOverlayActive ? (
-        <div className="absolute top-3 left-3 z-20 flex flex-col items-start gap-2">
-          <div className="flex items-center gap-1">
+        <div className="absolute left-2 top-2 z-20 flex max-w-[calc(100%-1rem)] flex-col items-start gap-2 sm:left-3 sm:top-3">
+          <div className="flex flex-wrap items-center gap-1.5 rounded-lg border-2 border-black bg-[#ffe600] p-1.5 shadow-[4px_4px_0_#000]">
             {(
               [
                 {
@@ -6458,7 +6458,7 @@ export function RetroOffice3D({
                 onClick={() => {
                   cameraPresetRef.current = CAMERA_PRESET_MAP[key];
                 }}
-                className="w-7 h-7 flex items-center justify-center rounded-md bg-[#1c1610]/80 text-amber-500/60 border border-amber-900/20 hover:bg-[#2a1e14] hover:text-amber-400 backdrop-blur-sm transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-md border-2 border-black bg-[#00f5ff] text-black shadow-[2px_2px_0_#000] transition-transform hover:-translate-y-0.5 sm:h-8 sm:w-8"
               >
                 {icon}
               </button>
@@ -7568,7 +7568,7 @@ export function RetroOffice3D({
 
       {/* Toolbar — top right. */}
       {!readOnly && !immersiveOverlayActive ? (
-        <div className="absolute top-3 right-3 flex items-center gap-2 z-20">
+        <div className="absolute right-2 top-12 z-20 flex max-w-[calc(100%-1rem)] flex-wrap items-center justify-end gap-1.5 sm:right-3 sm:top-3 sm:flex-nowrap sm:gap-2">
           {remoteOfficeEnabled &&
           (remoteOfficeSourceKind === "presence_endpoint"
             ? remoteOfficePresenceUrl.trim().length > 0
@@ -7576,7 +7576,7 @@ export function RetroOffice3D({
             <button
               onClick={() => setSettingsModalOpen(true)}
               title={remoteOfficeStatusText}
-              className="flex h-7 items-center justify-center gap-1 rounded-md border border-white/15 bg-[#120e08]/92 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/75 transition-all backdrop-blur-sm hover:border-cyan-400/45 hover:text-cyan-100"
+              className="flex h-9 items-center justify-center gap-1 rounded-md border-2 border-black bg-[#00f5ff] px-2 text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5 sm:h-8"
             >
               <span>{remoteOfficeLabel}</span>
             </button>
@@ -7585,7 +7585,7 @@ export function RetroOffice3D({
             <button
               onClick={onAddAgent}
               title="Tambah agen"
-              className="flex h-7 items-center justify-center gap-1 rounded-md border border-cyan-500/35 bg-[#071018]/92 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-200 transition-all backdrop-blur-sm hover:border-cyan-400/55 hover:text-white"
+              className="flex h-9 items-center justify-center gap-1 rounded-md border-2 border-black bg-[#ff4fd8] px-2 text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5 sm:h-8"
             >
               <UserPlus size={12} />
               <span>Add</span>
@@ -7595,7 +7595,7 @@ export function RetroOffice3D({
             <button
               onClick={() => onRenderModeChange("2d")}
               title="Beralih ke kantor piksel 2D"
-              className="flex h-7 items-center justify-center gap-1 rounded-md border border-white/15 bg-[#120e08]/92 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/75 transition-all backdrop-blur-sm hover:border-cyan-400/45 hover:text-cyan-100"
+              className="flex h-9 items-center justify-center gap-1 rounded-md border-2 border-black bg-[#00f5ff] px-2 text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[3px_3px_0_#000] transition-transform hover:-translate-y-0.5 sm:h-8"
             >
               <span>2D</span>
             </button>
@@ -7781,7 +7781,7 @@ export function RetroOffice3D({
       {!immersiveOverlayActive ? (
         <>
           {/* Ideas 3 + 6 + 8: Mini status bar — bottom left. */}
-          <div className="absolute bottom-3 left-3 flex flex-col items-start gap-1.5 z-10 pointer-events-none select-none">
+          <div className="absolute bottom-2 left-2 right-2 z-10 flex max-w-[calc(100%-1rem)] flex-col items-start gap-1.5 pointer-events-none select-none sm:bottom-3 sm:left-3 sm:right-auto">
             {/* Idea 3: Activity feed entries — newest on bottom. */}
             {statusFeedEvents
               .slice(0, 4)
@@ -7789,14 +7789,14 @@ export function RetroOffice3D({
               .map((ev) => (
                 <div
                   key={`${ev.id}-${ev.ts}`}
-                  className="flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-mono"
+                  className="flex max-w-full items-center gap-2 rounded-md border-2 border-black bg-[#ff4fd8] px-3 py-1 text-[10px] font-black text-black shadow-[3px_3px_0_#000]"
                 >
                   <span className="text-amber-400/80 font-semibold">{ev.name}</span>
                   <span className="text-amber-600/70">{ev.text}</span>
                 </div>
               ))}
             {/* Ideas 6 + 8: Gateway status, agent counts, vibe score. */}
-            <div className="flex items-center gap-3 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-mono">
+            <div className="flex max-w-full flex-wrap items-center gap-2 rounded-md border-2 border-black bg-[#ffe600] px-3 py-1 text-[10px] font-black text-black shadow-[3px_3px_0_#000]">
               <span className="text-amber-500/60">
                 {agents.filter((a) => a.status === "working").length} working
               </span>
