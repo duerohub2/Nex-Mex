@@ -333,20 +333,20 @@ export function PixelOffice2D(props: PixelOffice2DProps) {
       {/* Studio settings modal (same panel the 3D office uses). */}
       {settingsOpen ? (
         <div className="absolute inset-0 z-30 flex items-start justify-end overflow-y-auto bg-black/35 p-4 backdrop-blur-[1px]">
-          <div className="flex max-h-[calc(100vh-2rem)] w-full max-w-sm flex-col overflow-hidden rounded-xl border border-cyan-500/20 bg-[#05090d]/95 shadow-2xl">
-            <div className="flex items-start justify-between border-b border-cyan-500/10 px-4 py-3">
+          <div className="flex max-h-[calc(100dvh-2rem)] w-full max-w-sm flex-col overflow-hidden rounded-xl border-2 border-black bg-[#fff8e7] text-black shadow-[-6px_6px_0_#000]">
+            <div className="flex items-start justify-between border-b-2 border-black bg-[#ffe600] px-3 py-3">
               <div>
-                <div className="font-mono text-[10px] font-semibold tracking-[0.28em] text-cyan-300/75">
+                <div className="font-mono text-[10px] font-black tracking-[0.12em] text-black">
                   STUDIO SETTINGS
                 </div>
-                <div className="mt-1 text-[11px] text-white/45">
+                <div className="mt-1 text-[11px] font-semibold text-black/70">
                   Customize the office banner and spoken replies across the app.
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setSettingsOpen(false)}
-                className="flex h-7 w-7 items-center justify-center rounded-md border border-cyan-500/10 bg-black/20 text-cyan-100/70 transition-colors hover:border-cyan-400/30 hover:text-cyan-100"
+                className="flex h-9 w-9 items-center justify-center rounded-md border-2 border-black bg-[#ff4fd8] text-black shadow-[2px_2px_0_#000]"
                 aria-label="Close studio settings"
               >
                 <X size={12} />
