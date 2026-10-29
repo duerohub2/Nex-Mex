@@ -7601,12 +7601,12 @@ export function RetroOffice3D({
             </button>
           ) : null}
           <div
-            className={`flex h-7 items-center rounded-md border px-2 text-[10px] font-mono uppercase tracking-[0.12em] ${
+            className={`flex min-h-8 items-center rounded-md border-2 border-black px-2 text-[9px] font-black uppercase tracking-[0.06em] text-black shadow-[2px_2px_0_#000] sm:text-[10px] sm:tracking-[0.1em] ${
               gatewayStatus === "connected"
-                ? "border-emerald-400/25 bg-emerald-500/10 text-emerald-100"
+                ? "bg-[#00f5a0]"
                 : gatewayStatus === "connecting"
-                  ? "border-amber-400/25 bg-amber-500/10 text-amber-100"
-                  : "border-rose-400/25 bg-rose-500/10 text-rose-100"
+                  ? "bg-[#ffe600]"
+                  : "bg-[#ff4fd8]"
             }`}
             title={`Runtime: ${activeAdapterType} (${gatewayStatus})`}
           >
@@ -7616,14 +7616,14 @@ export function RetroOffice3D({
           <button
             onClick={() => setHeatmapMode((p) => !p)}
             title="Toggle heatmap"
-            className={`w-7 h-7 flex items-center justify-center rounded-md transition-all backdrop-blur-sm border ${heatmapMode ? "bg-amber-500/30 text-amber-300 border-amber-500/50" : "bg-[#1c1610]/80 text-amber-500/40 border-amber-900/20 hover:text-amber-400"}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-md border-2 border-black text-black shadow-[2px_2px_0_#000] sm:h-8 sm:w-8 ${heatmapMode ? "bg-[#ffe600]" : "bg-white"}`}
           >
             <MapIcon size={12} />
           </button>
           <button
             onClick={() => setTrailMode((p) => !p)}
             title="Toggle trails"
-            className={`w-7 h-7 flex items-center justify-center rounded-md transition-all backdrop-blur-sm border ${trailMode ? "bg-amber-500/30 text-amber-300 border-amber-500/50" : "bg-[#1c1610]/80 text-amber-500/40 border-amber-900/20 hover:text-amber-400"}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-md border-2 border-black text-black shadow-[2px_2px_0_#000] sm:h-8 sm:w-8 ${trailMode ? "bg-[#ffe600]" : "bg-white"}`}
           >
             <Maximize size={12} />
           </button>
@@ -7631,7 +7631,7 @@ export function RetroOffice3D({
           <button
             onClick={toggleEdit}
             title={editMode ? "Selesai mengedit" : "Edit kantor"}
-            className={`w-7 h-7 flex items-center justify-center rounded-md transition-all backdrop-blur-sm border ${editMode ? "bg-amber-500/30 text-amber-300 border-amber-500/50" : "bg-[#1c1610]/80 text-amber-500/40 border-amber-900/20 hover:text-amber-400"}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-md border-2 border-black text-black shadow-[2px_2px_0_#000] sm:h-8 sm:w-8 ${editMode ? "bg-[#ff4fd8]" : "bg-white"}`}
           >
             {editMode ? (
               <Check size={12} strokeWidth={2.5} />
