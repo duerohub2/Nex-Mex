@@ -411,13 +411,13 @@ const PALETTE: PaletteEntry[] = [
   { type: "jukebox", label: "Jukebox", icon: "🎵", defaults: { facing: 0 } },
   {
     type: "kanban_board",
-    label: "Kanban Board",
+    label: "Papan Tugas",
     icon: "📌",
     defaults: { w: 130, h: 65, facing: 90 },
   },
   {
     type: "whiteboard",
-    label: "Whiteboard",
+    label: "Papan Tulis",
     icon: "📝",
     defaults: { w: 10, h: 60 },
   },
@@ -7584,7 +7584,7 @@ export function RetroOffice3D({
           {onAddAgent ? (
             <button
               onClick={onAddAgent}
-              title="Add agent"
+              title="Tambah agen"
               className="flex h-7 items-center justify-center gap-1 rounded-md border border-cyan-500/35 bg-[#071018]/92 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-cyan-200 transition-all backdrop-blur-sm hover:border-cyan-400/55 hover:text-white"
             >
               <UserPlus size={12} />
@@ -7594,7 +7594,7 @@ export function RetroOffice3D({
           {onRenderModeChange ? (
             <button
               onClick={() => onRenderModeChange("2d")}
-              title="Switch to the 2D pixel office"
+              title="Beralih ke kantor piksel 2D"
               className="flex h-7 items-center justify-center gap-1 rounded-md border border-white/15 bg-[#120e08]/92 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/75 transition-all backdrop-blur-sm hover:border-cyan-400/45 hover:text-cyan-100"
             >
               <span>2D</span>
@@ -7630,7 +7630,7 @@ export function RetroOffice3D({
           {/* Edit office toggle. */}
           <button
             onClick={toggleEdit}
-            title={editMode ? "Done editing" : "Edit office"}
+            title={editMode ? "Selesai mengedit" : "Edit kantor"}
             className={`w-7 h-7 flex items-center justify-center rounded-md transition-all backdrop-blur-sm border ${editMode ? "bg-amber-500/30 text-amber-300 border-amber-500/50" : "bg-[#1c1610]/80 text-amber-500/40 border-amber-900/20 hover:text-amber-400"}`}
           >
             {editMode ? (
@@ -7641,7 +7641,7 @@ export function RetroOffice3D({
           </button>
           <button
             onClick={() => setSettingsModalOpen(true)}
-            title="Voice reply settings"
+            title="Pengaturan balasan suara"
             className={`w-7 h-7 flex items-center justify-center rounded-md transition-all backdrop-blur-sm border ${settingsModalOpen ? "bg-amber-500/30 text-amber-300 border-amber-500/50" : "bg-[#1c1610]/80 text-amber-500/40 border-amber-900/20 hover:text-amber-400"}`}
           >
             <Settings2 size={12} />
@@ -7697,7 +7697,7 @@ export function RetroOffice3D({
                 type="button"
                 onClick={() => setSettingsModalOpen(false)}
                 className="flex h-7 w-7 items-center justify-center rounded-md border border-cyan-500/10 bg-black/20 text-cyan-100/70 transition-colors hover:border-cyan-400/30 hover:text-cyan-100"
-                aria-label="Close studio settings"
+                aria-label="Tutup pengaturan studio"
               >
                 <X size={12} />
               </button>
