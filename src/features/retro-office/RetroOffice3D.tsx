@@ -6502,7 +6502,7 @@ export function RetroOffice3D({
 
       {/* Title — top center overlay. */}
       {!immersiveOverlayActive ? (
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none select-none z-10">
+        <div className="pointer-events-none absolute left-1/2 top-3 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 select-none sm:flex">
           <div className="flex items-center gap-3">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-amber-500/40" />
             <span className="text-sm tracking-[0.3em] text-amber-300/80 font-bold uppercase">
@@ -6516,7 +6516,7 @@ export function RetroOffice3D({
       {/* Agent roster — compact top summary with overflow panel. */}
       {!readOnly && !immersiveOverlayActive ? (
         <div
-          className="absolute top-10 left-1/2 z-20 -translate-x-1/2"
+          className="absolute left-1/2 top-10 z-20 hidden -translate-x-1/2 sm:block"
           data-conversation-groups={conversationGroups
             .map((group) => group.id)
             .join("|")}
@@ -7007,7 +7007,7 @@ export function RetroOffice3D({
           </div>
           <div className="absolute bottom-[3.1vh] left-1/2 h-[1.2vh] w-[12vw] -translate-x-1/2 rounded-full bg-[#0d0d0d] shadow-[0_0_0_1px_rgba(90,90,90,0.5)]" />
           <div className="absolute bottom-[1.1vh] left-1/2 h-[2vh] w-[20vw] -translate-x-1/2 rounded-[999px] bg-[#101010] shadow-[0_0_0_1px_rgba(82,82,82,0.5)]" />
-          <div className="pointer-events-auto absolute right-[7vw] top-[7vh] flex items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-2 backdrop-blur-sm">
+          <div className="pointer-events-auto absolute right-[7vw] top-[7vh] hidden items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-2 backdrop-blur-sm sm:flex">
             <div className="h-2 w-2 rounded-full bg-emerald-400" />
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-200/90">
               Monitor View
@@ -7074,7 +7074,7 @@ export function RetroOffice3D({
             />
           </div>
           <div className="absolute bottom-[2vh] left-1/2 h-[2vh] w-[22vw] -translate-x-1/2 rounded-[999px] bg-[#061120] shadow-[0_0_0_1px_rgba(34,211,238,0.2)]" />
-          <div className="pointer-events-auto absolute right-[5.2vw] top-[3.4vh]">
+          <div className="pointer-events-auto absolute right-[5.2vw] top-[3.4vh] hidden sm:block">
             <button
               type="button"
               onClick={() => {
@@ -7274,7 +7274,7 @@ export function RetroOffice3D({
             </div>
           </div>
           <div className="absolute bottom-[2.4vh] left-1/2 h-[1.8vh] w-[20vw] -translate-x-1/2 rounded-[999px] bg-[#12081e] shadow-[0_0_0_1px_rgba(167,139,250,0.24)]" />
-          <div className="pointer-events-auto absolute right-[5.2vw] top-[3.4vh]">
+          <div className="pointer-events-auto absolute right-[5.2vw] top-[3.4vh] hidden sm:block">
             <button
               type="button"
               onClick={() => {
@@ -7316,7 +7316,7 @@ export function RetroOffice3D({
           </div>
           <div className="absolute bottom-[4vh] left-1/2 h-[1.6vh] w-[16vw] -translate-x-1/2 rounded-full bg-[#07111f] shadow-[0_0_0_1px_rgba(56,189,248,0.22)]" />
           <div className="absolute bottom-[2vh] left-1/2 h-[2.2vh] w-[24vw] -translate-x-1/2 rounded-[999px] bg-[#07101c] shadow-[0_0_0_1px_rgba(56,189,248,0.18)]" />
-          <div className="pointer-events-auto absolute right-[5.2vw] top-[3.4vh]">
+          <div className="pointer-events-auto absolute right-[5.2vw] top-[3.4vh] hidden sm:block">
             <button
               type="button"
               onClick={() => {
@@ -7568,7 +7568,7 @@ export function RetroOffice3D({
 
       {/* Toolbar — top right. */}
       {!readOnly && !immersiveOverlayActive ? (
-        <div className="absolute left-2 right-2 top-16 z-20 flex max-w-[calc(100%-1rem)] flex-wrap items-center justify-end gap-1.5 sm:left-auto sm:right-3 sm:top-3 sm:max-w-none sm:flex-nowrap sm:gap-2">
+        <div className="absolute left-2 right-12 top-28 z-20 flex max-w-[calc(100%-3.5rem)] flex-wrap items-center justify-start gap-2 sm:left-auto sm:right-3 sm:top-3 sm:max-w-none sm:flex-nowrap sm:justify-end sm:gap-2">
           {remoteOfficeEnabled &&
           (remoteOfficeSourceKind === "presence_endpoint"
             ? remoteOfficePresenceUrl.trim().length > 0
@@ -7781,7 +7781,7 @@ export function RetroOffice3D({
       {!immersiveOverlayActive ? (
         <>
           {/* Ideas 3 + 6 + 8: Mini status bar — bottom left. */}
-          <div className="absolute bottom-2 left-2 right-2 z-10 flex max-w-[calc(100%-1rem)] flex-col items-start gap-1.5 pointer-events-none select-none sm:bottom-3 sm:left-3 sm:right-auto">
+          <div className="pointer-events-none absolute bottom-2 left-2 right-2 z-10 hidden max-w-[calc(100%-1rem)] flex-col items-start gap-1.5 select-none sm:bottom-3 sm:left-3 sm:right-auto sm:flex">
             {/* Idea 3: Activity feed entries — newest on bottom. */}
             {statusFeedEvents
               .slice(0, 4)
