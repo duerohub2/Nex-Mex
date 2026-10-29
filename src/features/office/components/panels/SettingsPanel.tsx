@@ -18,8 +18,8 @@ type SettingsPanelProps = {
   gatewayToken?: string;
   selectedAdapterType?: StudioGatewayAdapterType;
   activeAdapterType?: StudioGatewayAdapterType;
-  onGatewayDisconnect?: () => void;
-  onGatewayConnect?: () => void;
+  onGatewayPutuskan koneksi?: () => void;
+  onGatewayHubungkan?: () => void;
   onGatewayUrlChange?: (value: string) => void;
   onGatewayTokenChange?: (value: string) => void;
   onGatewayAdapterTypeChange?: (value: StudioGatewayAdapterType) => void;
@@ -59,8 +59,8 @@ export function SettingsPanel({
   gatewayToken,
   selectedAdapterType = "hermes",
   activeAdapterType = "hermes",
-  onGatewayDisconnect,
-  onGatewayConnect,
+  onGatewayPutuskan koneksi,
+  onGatewayHubungkan,
   onGatewayUrlChange,
   onGatewayTokenChange,
   onGatewayAdapterTypeChange,
@@ -97,10 +97,10 @@ export function SettingsPanel({
   const normalizedGatewayToken = gatewayToken ?? "";
   const gatewayStateLabel = gatewayStatus
     ? gatewayStatus.charAt(0).toUpperCase() + gatewayStatus.slice(1)
-    : "Unknown";
-  const isGatewayConnected = gatewayStatus === "connected";
-  const gatewayDisconnectDisabled = !isGatewayConnected;
-  const gatewayConnectDisabled = normalizedGatewayUrl.length === 0;
+    : "Tidak diketahui";
+  const isGatewayHubungkaned = gatewayStatus === "connected";
+  const gatewayPutuskan koneksiDisabled = !isGatewayHubungkaned;
+  const gatewayHubungkanDisabled = normalizedGatewayUrl.length === 0;
   const tokenOptional =
     selectedAdapterType === "hermes" ||
     selectedAdapterType === "demo" ||
@@ -120,7 +120,7 @@ export function SettingsPanel({
             </div>
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-200/70">
-            {officeTitleLoaded ? "Ready" : "Loading"}
+            {officeTitleLoaded ? "Siap" : "Memuat"}
           </span>
         </div>
         <input
@@ -129,7 +129,7 @@ export function SettingsPanel({
           maxLength={48}
           disabled={!officeTitleLoaded}
           onChange={(event) => onOfficeTitleChange(event.target.value)}
-          placeholder="Luke Headquarters"
+          placeholder="Kantor Pusat NEX-MEX"
           className="mt-3 w-full rounded-md border border-cyan-500/10 bg-black/25 px-3 py-2 text-[11px] uppercase tracking-[0.18em] text-cyan-100 outline-none transition-colors placeholder:text-cyan-100/30 focus:border-cyan-400/30 disabled:cursor-not-allowed disabled:opacity-50"
         />
         <div className="mt-2 text-[10px] text-white/50">
@@ -219,24 +219,24 @@ export function SettingsPanel({
         </div>
         <div className="mt-3 flex items-center justify-between gap-3">
           <div className="text-[10px] text-white/60">
-            Connect to apply the selected backend, or disconnect to return to the connection screen.
+            Hubungkan to apply the selected backend, or disconnect to return to the connection screen.
           </div>
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => onGatewayConnect?.()}
-              disabled={gatewayConnectDisabled}
+              onClick={() => onGatewayHubungkan?.()}
+              disabled={gatewayHubungkanDisabled}
               className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-cyan-50 transition-colors hover:border-cyan-400/40 hover:bg-cyan-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {gatewayStatus === "connecting" ? "Connecting..." : "Connect"}
+              {gatewayStatus === "connecting" ? "Hubungkaning..." : "Hubungkan"}
             </button>
             <button
               type="button"
-              onClick={() => onGatewayDisconnect?.()}
-              disabled={gatewayDisconnectDisabled}
+              onClick={() => onGatewayPutuskan koneksi?.()}
+              disabled={gatewayPutuskan koneksiDisabled}
               className="rounded-md border border-rose-500/20 bg-rose-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-rose-100 transition-colors hover:border-rose-400/40 hover:bg-rose-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Disconnect gateway
+              Putuskan koneksi gateway
             </button>
           </div>
         </div>
@@ -244,9 +244,9 @@ export function SettingsPanel({
       <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <div className="text-[11px] font-medium text-white">Remote office</div>
+            <div className="text-[11px] font-medium text-white">Kantor jarak jauh</div>
             <div className="mt-1 text-[10px] text-white/75">
-              Attach a second read-only office from either another Hermes3D or a remote Hermes gateway.
+              Hubungkan kantor kedua dalam mode hanya-baca dari Hermes3D lain atau gateway Hermes jarak jauh.
             </div>
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-200/70">
@@ -258,7 +258,7 @@ export function SettingsPanel({
             <button
               type="button"
               role="switch"
-              aria-label="Remote office"
+              aria-label="Kantor jarak jauh"
               aria-checked={remoteOfficeEnabled}
               className={`ui-switch self-center ${remoteOfficeEnabled ? "ui-switch--on" : ""}`}
               onClick={() => onRemoteOfficeEnabledChange(!remoteOfficeEnabled)}
@@ -347,7 +347,7 @@ export function SettingsPanel({
                     }}
                     className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.14em] text-cyan-100 transition-colors hover:border-cyan-400/40 hover:bg-cyan-500/15"
                   >
-                    Save
+                    Simpan
                   </button>
                   {remoteOfficeTokenConfigured ? (
                     <button
@@ -401,7 +401,7 @@ export function SettingsPanel({
                     }}
                     className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.14em] text-cyan-100 transition-colors hover:border-cyan-400/40 hover:bg-cyan-500/15"
                   >
-                    Save
+                    Simpan
                   </button>
                   {remoteOfficeTokenConfigured ? (
                     <button
@@ -478,9 +478,9 @@ export function SettingsPanel({
       ) : null}
       {graphicsQuality && onGraphicsQualityChange ? (
         <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
-          <div className="text-[11px] font-medium text-white">Graphics quality</div>
+          <div className="text-[11px] font-medium text-white">Kualitas grafis</div>
           <div className="mt-1 text-[10px] text-white/75">
-            Balance visual fidelity against performance in the 3D office.
+            Seimbangkan kualitas visual dan performa kantor 3D.
           </div>
           <div className="mt-3 grid gap-2">
             {GRAPHICS_QUALITY_OPTIONS.map((option) => {
