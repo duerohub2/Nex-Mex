@@ -110,8 +110,8 @@ export function SettingsPanel({
   const [remoteOfficeTokenDraft, setRemoteOfficeTokenDraft] = useState("");
 
   return (
-    <div className="px-4 py-4">
-      <div className="rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+    <div className="nex-pop-settings px-3 py-3 sm:px-4 sm:py-4">
+      <div className="mb-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-[11px] font-medium text-white">Judul studio</div>
@@ -136,7 +136,7 @@ export function SettingsPanel({
           Digunakan pada bagian atas tampilan kantor.
         </div>
       </div>
-      <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+      <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-[11px] font-medium text-white">Gateway</div>
@@ -164,10 +164,10 @@ export function SettingsPanel({
                 key={adapterType}
                 type="button"
                 onClick={() => onGatewayAdapterTypeChange?.(adapterType)}
-                className={`rounded-md border px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                className={`min-h-9 rounded-md border-2 border-black px-3 py-2 text-[10px] font-black uppercase tracking-[0.08em] text-black shadow-[2px_2px_0_#000] transition-colors ${
                   selected
-                    ? "border-cyan-400/35 bg-cyan-500/12 text-cyan-50"
-                    : "border-cyan-500/10 bg-black/20 text-white/75 hover:border-cyan-400/25 hover:text-cyan-50"
+                    ? "bg-[#ffe600]"
+                    : "bg-white hover:bg-[#00f5ff]"
                 }`}
               >
                 {label}
@@ -192,19 +192,19 @@ export function SettingsPanel({
                     ? "http://localhost:3000/api/runtime/custom"
                   : "ws://localhost:18789"
               }
-              className="w-full rounded-md border border-cyan-500/10 bg-black/25 px-3 py-2 font-mono text-[11px] text-cyan-100 outline-none transition-colors placeholder:text-cyan-100/30 focus:border-cyan-400/30"
+              className="w-full rounded-md border-2 border-black bg-white px-3 py-2 font-mono text-[11px] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-[#00f5ff]"
             />
           </div>
           <div>
             <div className="mb-1 text-[10px] uppercase tracking-[0.14em] text-cyan-100/65">
-              {tokenOptional ? "Upstream token (optional)" : "Upstream token"}
+              {tokenOptional ? "Token gateway (opsional)" : "Token gateway"}
             </div>
             <input
               type="password"
               value={normalizedGatewayToken}
               onChange={(event) => onGatewayTokenChange?.(event.target.value)}
-              placeholder={tokenOptional ? "optional token" : "gateway token"}
-              className="w-full rounded-md border border-cyan-500/10 bg-black/25 px-3 py-2 text-[11px] text-cyan-100 outline-none transition-colors placeholder:text-cyan-100/30 focus:border-cyan-400/30"
+              placeholder={tokenOptional ? "token opsional" : "token gateway"}
+              className="w-full rounded-md border-2 border-black bg-white px-3 py-2 text-[11px] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-[#00f5ff]"
             />
           </div>
         </div>
@@ -219,7 +219,7 @@ export function SettingsPanel({
         </div>
         <div className="mt-3 flex items-center justify-between gap-3">
           <div className="text-[10px] text-white/60">
-            Hubungkan to apply the selected backend, or disconnect to return to the connection screen.
+            Hubungkan untuk menerapkan backend pilihan, atau putuskan koneksi untuk kembali ke layar koneksi.
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -228,7 +228,7 @@ export function SettingsPanel({
               disabled={gatewayConnectDisabled}
               className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-cyan-50 transition-colors hover:border-cyan-400/40 hover:bg-cyan-500/15 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {gatewayStatus === "connecting" ? "Hubungkaning..." : "Hubungkan"}
+              {gatewayStatus === "connecting" ? "Menghubungkan..." : "Hubungkan"}
             </button>
             <button
               type="button"
@@ -241,7 +241,7 @@ export function SettingsPanel({
           </div>
         </div>
       </div>
-      <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+      <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-[11px] font-medium text-white">Kantor jarak jauh</div>
@@ -250,7 +250,7 @@ export function SettingsPanel({
             </div>
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-200/70">
-            {remoteOfficeEnabled ? "Enabled" : "Disabled"}
+            {remoteOfficeEnabled ? "Aktif" : "Nonaktif"}
           </span>
         </div>
         <div className="ui-settings-row mt-3 flex min-h-[72px] items-center justify-between gap-6 rounded-lg border border-cyan-500/10 bg-black/15 px-4 py-3">
@@ -273,7 +273,7 @@ export function SettingsPanel({
             </div>
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-200/70">
-            {remoteOfficeTokenConfigured ? "Token set" : "No token"}
+            {remoteOfficeTokenConfigured ? "Token tersedia" : "No token"}
           </span>
         </div>
         <div className="mt-3 grid gap-3">
@@ -321,7 +321,7 @@ export function SettingsPanel({
                   value={remoteOfficePresenceUrl}
                   onChange={(event) => onRemoteOfficePresenceUrlChange(event.target.value)}
                   placeholder="https://other-office.example.com/api/office/presence"
-                  className="w-full rounded-md border border-cyan-500/10 bg-black/25 px-3 py-2 text-[11px] text-cyan-100 outline-none transition-colors placeholder:text-cyan-100/30 focus:border-cyan-400/30"
+                  className="w-full rounded-md border-2 border-black bg-white px-3 py-2 text-[11px] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-[#00f5ff]"
                 />
                 <div className="mt-1 text-[10px] text-white/50">
                   Studio polls this endpoint server-side when the other machine is also running Hermes3D.
@@ -375,7 +375,7 @@ export function SettingsPanel({
                   value={remoteOfficeGatewayUrl}
                   onChange={(event) => onRemoteOfficeGatewayUrlChange(event.target.value)}
                   placeholder="wss://remote-gateway.example.com"
-                  className="w-full rounded-md border border-cyan-500/10 bg-black/25 px-3 py-2 text-[11px] text-cyan-100 outline-none transition-colors placeholder:text-cyan-100/30 focus:border-cyan-400/30"
+                  className="w-full rounded-md border-2 border-black bg-white px-3 py-2 text-[11px] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-[#00f5ff]"
                 />
                 <div className="mt-1 text-[10px] text-white/50">
                   Hermes3D connects from the browser directly to the remote Hermes gateway and derives a read-only presence snapshot.
@@ -424,7 +424,7 @@ export function SettingsPanel({
           )}
         </div>
       </div>
-      <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+      <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-[11px] font-medium text-white">Onboarding</div>
@@ -442,7 +442,7 @@ export function SettingsPanel({
         </div>
       </div>
       {renderMode && onRenderModeChange ? (
-        <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+        <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
           <div className="text-[11px] font-medium text-white">Office renderer</div>
           <div className="mt-1 text-[10px] text-white/75">
             Pick the immersive 3D office or the lightweight 2D pixel office.
@@ -477,7 +477,7 @@ export function SettingsPanel({
         </div>
       ) : null}
       {graphicsQuality && onGraphicsQualityChange ? (
-        <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+        <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
           <div className="text-[11px] font-medium text-white">Kualitas grafis</div>
           <div className="mt-1 text-[10px] text-white/75">
             Seimbangkan kualitas visual dan performa kantor 3D.
@@ -530,7 +530,7 @@ export function SettingsPanel({
           {voiceRepliesLoaded ? (voiceRepliesEnabled ? "On" : "Off") : "Loading"}
         </span>
       </div>
-      <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+      <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
         <div className="text-[11px] font-medium text-white">Voice</div>
         <div className="mt-1 text-[10px] text-white/75">
           Choose the voice used for spoken agent replies.
@@ -560,7 +560,7 @@ export function SettingsPanel({
           })}
         </div>
       </div>
-      <div className="mt-3 rounded-lg border border-cyan-500/10 bg-black/20 px-4 py-3">
+      <div className="mt-3 rounded-xl border-2 border-black bg-[#fff8e7] px-3 py-3 text-black shadow-[-4px_4px_0_#000] sm:px-4">
         <div className="flex items-center justify-between gap-3">
           <div>
             <div className="text-[11px] font-medium text-white">Speed</div>
