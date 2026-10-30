@@ -1,6 +1,9 @@
 "use strict";
 
 const http = require("http");
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
 const { randomUUID } = require("crypto");
 const { WebSocketServer } = require("ws");
 
@@ -43,6 +46,76 @@ const sessionSettings = new Map();
 const conversationHistory = new Map();
 const activeRuns = new Map();
 const activeSendEventFns = new Set();
+
+const stateFile =
+  process.env.NEX_MEX_STATE_PATH ||
+  path.join(process.env.HOME || os.homedir(), ".nex-mex", "demo-gateway-state.json");
+
+function loadPersistentState() {
+  try {
+    if (!fs.existsSync(stateFile)) return;
+    const saved = JSON.parse(fs.readFileSync(stateFile, "utf8"));
+    if (!saved || saved.version !== 1) return;
+
+    if (Array.isArray(saved.agents) && saved.agents.length > 0) {
+      agents.clear();
+      for (const agent of saved.agents) {
+        if (agent && typeof agent.id === "string" && typeof agent.name === "string") {
+          agents.set(agent.id, {
+            id: agent.id,
+            name: agent.name,
+            role: typeof agent.role === "string" ? agent.role : "",
+            workspace: typeof agent.workspace === "string" ? agent.workspace : "/demo",
+          });
+        }
+      }
+      if (!agents.has("demo-orchestrator")) {
+        agents.set("demo-orchestrator", {
+          id: "demo-orchestrator",
+          name: "Avery",
+          role: "Orchestrator",
+          workspace: "/demo/orchestrator",
+        });
+      }
+    }
+
+    for (const [key, value] of Array.isArray(saved.files) ? saved.files : []) {
+      if (typeof key === "string" && typeof value === "string") files.set(key, value);
+    }
+    for (const [key, value] of Array.isArray(saved.sessionSettings) ? saved.sessionSettings : []) {
+      if (typeof key === "string" && value && typeof value === "object") sessionSettings.set(key, value);
+    }
+    for (const [key, value] of Array.isArray(saved.conversationHistory) ? saved.conversationHistory : []) {
+      if (typeof key === "string" && Array.isArray(value)) {
+        conversationHistory.set(key, value.slice(-1000));
+      }
+    }
+    console.log(`[demo-gateway] State dipulihkan dari ${stateFile}`);
+  } catch (error) {
+    console.error("[demo-gateway] Gagal membaca state tersimpan:", error.message);
+  }
+}
+
+function persistState() {
+  try {
+    fs.mkdirSync(path.dirname(stateFile), { recursive: true });
+    const snapshot = {
+      version: 1,
+      savedAt: new Date().toISOString(),
+      agents: [...agents.values()],
+      files: [...files.entries()],
+      sessionSettings: [...sessionSettings.entries()],
+      conversationHistory: [...conversationHistory.entries()].map(([key, history]) => [key, history.slice(-1000)]),
+    };
+    const temporaryFile = `${stateFile}.tmp`;
+    fs.writeFileSync(temporaryFile, JSON.stringify(snapshot, null, 2), { encoding: "utf8", mode: 0o600 });
+    fs.renameSync(temporaryFile, stateFile);
+  } catch (error) {
+    console.error("[demo-gateway] Gagal menyimpan state:", error.message);
+  }
+}
+
+loadPersistentState();
 
 function randomId() {
   return randomUUID().replace(/-/g, "");
@@ -133,6 +206,7 @@ async function handleMethod(method, params, id, sendEvent) {
         role,
         workspace: `/demo/${slug}`,
       });
+      persistState();
       broadcastEvent({
         type: "event",
         event: "presence",
@@ -147,6 +221,7 @@ async function handleMethod(method, params, id, sendEvent) {
       if (!agent) return resErr(id, "not_found", `Agent ${agentId} not found`);
       if (typeof p.name === "string" && p.name.trim()) agent.name = p.name.trim();
       if (typeof p.role === "string") agent.role = p.role.trim();
+      persistState();
       return resOk(id, { ok: true, removedBindings: 0 });
     }
 
@@ -155,6 +230,7 @@ async function handleMethod(method, params, id, sendEvent) {
       if (agentId && agents.has(agentId) && agentId !== "demo-orchestrator") {
         agents.delete(agentId);
         clearHistory(sessionKeyFor(agentId));
+        persistState();
       }
       return resOk(id, { ok: true, removedBindings: 0 });
     }
@@ -168,6 +244,7 @@ async function handleMethod(method, params, id, sendEvent) {
     case "agents.files.set": {
       const key = `${p.agentId || "demo-orchestrator"}/${p.name || ""}`;
       files.set(key, typeof p.content === "string" ? p.content : "");
+      persistState();
       return resOk(id, {});
     }
 
@@ -253,6 +330,7 @@ async function handleMethod(method, params, id, sendEvent) {
       if (p.model !== undefined) next.model = p.model;
       if (p.thinkingLevel !== undefined) next.thinkingLevel = p.thinkingLevel;
       sessionSettings.set(key, next);
+      persistState();
       return resOk(id, {
         ok: true,
         key,
@@ -264,6 +342,7 @@ async function handleMethod(method, params, id, sendEvent) {
     case "sessions.reset": {
       const key = typeof p.key === "string" ? p.key : sessionKeyFor("demo-orchestrator");
       clearHistory(key);
+      persistState();
       return resOk(id, { ok: true });
     }
 
@@ -315,6 +394,7 @@ async function handleMethod(method, params, id, sendEvent) {
           const history = getHistory(sessionKey);
           history.push({ role: "user", content: message });
           history.push({ role: "assistant", content: reply });
+          persistState();
           emitChat("final", { stopReason: "end_turn", message: { role: "assistant", content: reply } });
           sendEvent({
             type: "event",
