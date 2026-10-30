@@ -42,7 +42,7 @@ Gateway demo berjalan pada:
 ws://127.0.0.1:18789
 ```
 
-Jika aplikasi meminta pemilihan backend, pilih **Demo backend** lalu hubungkan ke gateway lokal tersebut.
+Peluncur lokal mengatur default koneksi ke URL tersebut dan memilih profil **Demo** melalui environment variable. Jika layar koneksi tetap muncul, periksa bahwa backend yang dipilih adalah **Demo backend**, lalu hubungkan ke gateway lokal tersebut.
 
 ## Penyimpanan data demo
 
@@ -77,7 +77,7 @@ Tekan `Ctrl+C` pada sesi Termux yang menjalankan aplikasi.
 - Gateway demo menghasilkan balasan simulasi, bukan AI sungguhan.
 - Mode demo tidak menjalankan tool eksternal atau otomasi sistem.
 - Penyimpanan JSON hanya untuk satu proses lokal; ini bukan database multi-pengguna.
-- UI koneksi upstream masih tersedia dan mungkin memerlukan pemilihan backend secara manual.
+- UI koneksi upstream masih tersedia; default profil Demo sudah diisi oleh peluncur, tetapi pengguna mungkin tetap perlu menekan tombol hubungkan.
 - Build dan uji langsung pada perangkat Android belum diverifikasi dari lingkungan pengembangan ini.
 
 ## Tahap pengembangan berikutnya
