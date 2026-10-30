@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 import { spawn } from "node:child_process";
 
-const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const children = [];
 let stopping = false;
 
 function launch(label, args) {
-  const child = spawn(npmCommand, args, {
+  const child = spawn(process.execPath, args, {
     stdio: "inherit",
     env: {
       ...process.env,
@@ -33,9 +32,15 @@ function shutdown(code = 0) {
   if (stopping) return;
   stopping = true;
   for (const child of children) {
-    if (!child.killed) child.kill("SIGTERM");
+    if (child.exitCode === null && !child.killed) child.kill("SIGTERM");
   }
-  setTimeout(() => process.exit(code), 300).unref();
+  const forceStop = setTimeout(() => {
+    for (const child of children) {
+      if (child.exitCode === null) child.kill("SIGKILL");
+    }
+    process.exit(code);
+  }, 1500);
+  forceStop.unref();
 }
 
 process.on("SIGINT", () => shutdown(0));
@@ -46,5 +51,5 @@ console.log("Gateway demo : ws://127.0.0.1:18789");
 console.log("Kantor       : http://127.0.0.1:3000");
 console.log("Tekan Ctrl+C untuk menghentikan kedua proses.\n");
 
-launch("Demo Gateway", ["run", "demo-gateway"]);
-launch("NEX-MEX Web", ["run", "dev"]);
+launch("Demo Gateway", ["server/demo-gateway-adapter.js"]);
+launch("NEX-MEX Web", ["server/index.js", "--dev"]);
