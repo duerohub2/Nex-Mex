@@ -70,12 +70,17 @@ const loadUpstreamGatewaySettings = (env = process.env) => {
   const settingsPath = resolveStudioSettingsPath(env);
   const parsed = readJsonFile(settingsPath);
   const gateway = parsed && typeof parsed === "object" ? parsed.gateway : null;
-  const url = typeof gateway?.url === "string" ? gateway.url.trim() : "";
-  const token = typeof gateway?.token === "string" ? gateway.token.trim() : "";
-  const adapterType =
+  const savedUrl = typeof gateway?.url === "string" ? gateway.url.trim() : "";
+  const savedToken = typeof gateway?.token === "string" ? gateway.token.trim() : "";
+  const savedAdapterType =
     typeof gateway?.adapterType === "string" && gateway.adapterType.trim()
       ? gateway.adapterType.trim()
       : "hermes";
+  // Environment defaults intentionally take precedence so launch profiles
+  // (such as NEX-MEX local demo) can select their own gateway safely.
+  const url = env.HERMES3D_GATEWAY_URL?.trim() || savedUrl;
+  const token = env.HERMES3D_GATEWAY_TOKEN?.trim() || savedToken;
+  const adapterType = env.HERMES3D_GATEWAY_ADAPTER_TYPE?.trim() || savedAdapterType;
   if (!token && adapterType === "hermes") {
     const defaults = readHermesGatewayDefaults(env);
     if (defaults) {
