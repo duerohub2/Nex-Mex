@@ -12,6 +12,8 @@ function launch(label, args) {
       HOST: process.env.HOST || "127.0.0.1",
       PORT: process.env.PORT || "3000",
       DEMO_ADAPTER_PORT: process.env.DEMO_ADAPTER_PORT || "18789",
+      HERMES3D_GATEWAY_URL: process.env.HERMES3D_GATEWAY_URL || "ws://127.0.0.1:18789",
+      HERMES3D_GATEWAY_ADAPTER_TYPE: process.env.HERMES3D_GATEWAY_ADAPTER_TYPE || "demo",
     },
   });
   children.push(child);
